@@ -6,21 +6,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap Demo</title>
+    <title>RH</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
 
     <style>
         .custom-sidebar {
             width: 200px;
-            /* Ajuste a largura conforme necessário */
         }
 
         .custom-main {
             flex: 0 0 80%;
-            /* Ajuste a largura conforme necessário */
             max-width: 100%;
-            /* Ajuste a largura conforme necessário */
         }
     </style>
 </head>
@@ -68,11 +65,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Relatórios <i class="fas fa-chart-bar"></i></a>
                         </li>
-                        <!-- Adicione mais itens de navegação conforme necessário -->
                     </ul>
                 </div>
             </nav>
-            <!-- Conteúdo principal -->
+
             <main class="col-md-10 custom-main">
                 <br>
                 <div class="container-sm">

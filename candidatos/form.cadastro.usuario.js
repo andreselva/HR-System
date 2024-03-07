@@ -24,7 +24,7 @@ async function cadastrarUsuario(event) {
 
         if (!elemento) {
             console.error(`Elemento com ID '${campo}' não encontrado.`);
-            continue;  // Pular para o próximo campo se o elemento não for encontrado
+            continue; 
         }
 
         const valor = elemento.value.trim();
@@ -39,7 +39,7 @@ async function cadastrarUsuario(event) {
         const formData = new FormData(form_cadastro);
         formData.append('action', 'cadastrar');
         const data = {
-            action: 'cadastrar',  // Adicione a ação aqui
+            action: 'cadastrar',
         };
 
         formData.forEach((value, key) => {

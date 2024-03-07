@@ -11,14 +11,11 @@
     <style>
         .custom-sidebar {
             width: 200px;
-            /* Ajuste a largura conforme necessário */
-        }
 
+        }
         .custom-main {
             flex: 0 0 80%;
-            /* Ajuste a largura conforme necessário */
             max-width: 100%;
-            /* Ajuste a largura conforme necessário */
         }
     </style>
 </head>
@@ -66,11 +63,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Relatórios <i class="fas fa-chart-bar"></i></a>
                         </li>
-                        <!-- Adicione mais itens de navegação conforme necessário -->
+
                     </ul>
                 </div>
             </nav>
-            <!-- Conteúdo principal -->
+
             <main class="col-md-10 custom-main">
                 <br>
                 <div class="container-sm">
