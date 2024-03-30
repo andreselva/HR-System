@@ -15,33 +15,27 @@ class User
         $this->conn = $conn;
     }
 
-    public function registerUser()
+    public function registerUser($data)
     {
-        $data = json_decode(file_get_contents("php://input"), true);
+        // Utilize prepared statements para prevenir SQL Injection
+        $sql = "INSERT INTO usuarios (name, lastname, username, email, password, adress, complement, city, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        file_put_contents('log.txt', print_r($data, true), FILE_APPEND);
+        $stmt = $this->conn->prepare($sql);
 
-        $name = $data["name"];
-        $lastname = $data["lastname"];
-        $username = $data["username"];
-        $email = $data["email"];
-        $password = $data["password"];
-        $adress = $data["adress"];
-        $complement = $data["complement"];
-        $city = $data["city"];
-        $state = $data["state"];
+        // Bind dos parâmetros
+        $stmt->bind_param("sssssssss", $data['name'], $data['lastname'], $data['username'], $data['email'], $data['password'], $data['adress'], $data['complement'], $data['city'], $data['state']);
 
-        $sql = "INSERT INTO usuarios (name, lastname, username, email, password, adress, complement, city, state)
-                    VALUES ('{$name}', '{$lastname}', '{$username}', '{$email}', '{$password}', '{$adress}', '{$complement}', '{$city}', '{$state}')";
+        $res = $stmt->execute();
 
-        $res = $this->conn->query($sql);
-
-        if ($res == true) {
+        if ($res === true) {
             echo json_encode(array("message" => "Usuário cadastrado com sucesso!"));
         } else {
-            echo json_encode(array("error" => "Erro no SQL: " . $this->conn->error));
+            echo json_encode(array("error" => "Erro no SQL: " . $stmt->error));
         }
+
+        $stmt->close();
     }
+
 
     public function listUsers()
     {
@@ -99,35 +93,31 @@ class User
 
     public function editarUsuario($id, $name, $lastname, $username, $email, $password, $adress, $complement, $city, $state)
     {
-        
-            $sql = "UPDATE usuarios SET name=?, lastname=? username=?, email=?, password=?, adress=?, comeplement=?, city=?, state=? WHERE id=?";
+        $sql = "UPDATE usuarios SET name=?, lastname=?, username=?, email=?, password=?, adress=?, complement=?, city=?, state=? WHERE id=?";
 
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("sssssssssi", $name, $lastname, $username, $email, $password, $adress, $complement, $city, $state, $id);
 
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("ssi", $name, $lastname, $username, $email, $password, $adress, $complement, $city, $state, $id);
+        $res = $stmt->execute();
 
-            $res = $stmt->execute();
-
-            if ($res == true) {
-                echo "Usuário editado com sucesso!";
-            } else {
-                echo "Ocorreu um erro ao tentar editar o usuário: " . $stmt->error;
-            }
-
-            $stmt->close();
+        if ($res == true) {
+            echo json_encode(array("message" => "Usuário editado com sucesso!"));
+        } else {
+            echo json_encode(array("error" => "Ocorreu um erro ao tentar editar o usuário: " . $stmt->error));
         }
-    
+
+        $stmt->close();
+    }
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
     $json_data = file_get_contents("php://input");
     $data = json_decode($json_data, true);
 
     $action = isset($data['action']) ? $data['action'] : null;
 
     if ($action == 'cadastrar') {
-        $user->registerUser();
+        $user->registerUser($data);
     } else if ($action == 'excluir') {
         $id = isset($data['id']) ? $data['id'] : null;
 
@@ -136,5 +126,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo json_encode(array("error" => "ID não fornecido."));
         }
+    } else if ($action == 'editar') {
+        $user->editarUsuario(
+            $data['id'],
+            $data['name'],
+            $data['lastname'],
+            $data['username'],
+            $data['email'],
+            $data['password'],
+            $data['adress'],
+            $data['complement'],
+            $data['city'],
+            $data['state']
+        );
     }
 }

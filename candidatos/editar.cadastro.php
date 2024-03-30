@@ -1,28 +1,64 @@
-
-
 <!DOCTYPE html>
+
+
+
 <html lang="pt-br" data-bs-theme="dark">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>RH</title>
+    <title>Bootstrap Demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
 
     <style>
         .custom-sidebar {
             width: 200px;
+            /* Ajuste a largura conforme necessário */
         }
 
         .custom-main {
             flex: 0 0 80%;
+            /* Ajuste a largura conforme necessário */
             max-width: 100%;
+            /* Ajuste a largura conforme necessário */
         }
     </style>
 </head>
 
 <body>
+    <?php
+
+    require_once("usuarios.class.php");
+
+    // Verifique se o ID do usuário foi passado via GET na URL
+    if (isset($_GET['id'])) {
+        $userId = $_GET['id'];
+    } else {
+        // Se o ID do usuário não estiver definido, redirecione ou mostre uma mensagem de erro
+        echo "ID do usuário não fornecido.";
+        exit; // Saia do script para evitar processamento adicional
+    }
+
+    
+    $user = $user->obterUsuarioPorId($userId);
+
+    $name = $user['name'];
+    $lastname = $user['lastname'];
+    $username = $user['username'];
+    $email = $user['email'];
+    $password = $user['password'];
+    $adress = $user['adress'];
+    $complement = $user['complement'];
+    $city = $user['city'];
+    $state = $user['state'];
+
+    ?>
+
+
+    <input type="hidden" id="userId" name="userId" value="<?php echo $userId; ?>">
+
+
     <div class="container-fluid">
         <div class="row">
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -65,10 +101,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Relatórios <i class="fas fa-chart-bar"></i></a>
                         </li>
+                        <!-- Adicione mais itens de navegação conforme necessário -->
                     </ul>
                 </div>
             </nav>
-
+            <!-- Conteúdo principal -->
             <main class="col-md-10 custom-main">
                 <br>
                 <div class="container-sm">
@@ -79,47 +116,47 @@
                     <form id="editUserForm" class="row g-3" method="post">
                         <div class="col-md-3">
                             <label for="name" class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Insira seu nome..." required>
+                            <input type="text" class="form-control" id="name" name="name" value="<?php echo $name; ?>" placeholder="Insira seu nome..." required>
                         </div>
                         <div class="col-md-6">
                             <label for="lastname" class="form-label">Sobrenome</label>
-                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Insira seu sobrenome..." required>
+                            <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo $lastname; ?>" placeholder="Insira seu sobrenome..." required>
                         </div>
                         <div class="col-md-3">
                             <label for="username" class="form-label">Nome de usuário</label>
                             <div class="input-group">
                                 <div class="input-group-text">@</div>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                                <input type="text" class="form-control" id="username" name="username" value="<?php echo $username; ?>" placeholder="Username" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label for="email" class="form-label">E-mail</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Insira seu melhor e-mail..." required>
+                            <input type="email" class="form-control" id="email" name="email" value="<?php echo $email; ?>" placeholder="Insira seu melhor e-mail..." required>
                         </div>
                         <div class="col-md-6">
                             <label for="password" class="form-label">Senha</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" class="form-control" id="password" value="<?php echo $password; ?>" name="password" required>
                         </div>
                         <div class="col-7">
                             <label for="address" class="form-label">Endereço</label>
-                            <input type="text" class="form-control" id="adress" name="adress" required>
+                            <input type="text" class="form-control" id="adress" name="adress" value="<?php echo $adress; ?>" required>
                         </div>
                         <div class="col-5">
                             <label for="complement" class="form-label">Complemento</label>
-                            <input type="text" class="form-control" id="complement" name="complement">
+                            <input type="text" class="form-control" id="complement" value="<?php echo $complement; ?>" name="complement">
                         </div>
                         <div class="col-md-6">
                             <label for="city" class="form-label">Cidade</label>
-                            <input type="text" class="form-control" id="city" name="city">
+                            <input type="text" class="form-control" id="city" name="city" value="<?php echo $city; ?>">
                         </div>
                         <div class="col-md-4">
                             <label for="state" class="form-label">Estado</label>
-                            <input type="text" class="form-control" id="state" name="state">
+                            <input type="text" class="form-control" id="state" name="state" value="<?php echo $state; ?>">
                         </div>
                         <div class="col-md-3">
                             <div>
                                 <button class="btn btn-primary" onclick="salvarEdicao(id, event)">Salvar</button>
-                                <button class="btn btn-danger" onclick="cancelEdit()">Cancelar</button>
+                                <button class="btn btn-danger" onclick="cancelEdit(e)">Cancelar</button>
                             </div>
                         </div>
                     </form>

@@ -8,7 +8,8 @@ function goToRegister() {
     window.location.href = './form.cadastro.usuarios.php';
 }
 
-function cancelEdit() {
+function cancelEdit(event) {
+    event.preventDefault();
     window.location.href = './listagem.cadastros.php';
 }
 
@@ -24,7 +25,7 @@ async function cadastrarUsuario(event) {
 
         if (!elemento) {
             console.error(`Elemento com ID '${campo}' não encontrado.`);
-            continue; 
+            continue;  // Pular para o próximo campo se o elemento não for encontrado
         }
 
         const valor = elemento.value.trim();
@@ -39,7 +40,7 @@ async function cadastrarUsuario(event) {
         const formData = new FormData(form_cadastro);
         formData.append('action', 'cadastrar');
         const data = {
-            action: 'cadastrar',
+            action: 'cadastrar',  // Adicione a ação aqui
         };
 
         formData.forEach((value, key) => {
@@ -105,40 +106,38 @@ async function excluirUsuario(id, event) {
     }
 }
 
-async function salvarUsuario(id, event) {
+async function salvarEdicao(id, event) {
     event.preventDefault();
 
     const formEdition = document.querySelector('#editUserForm');
+    const userId = document.querySelector('#userId').value;
 
-    try {
-        const formData = new FormData(formEdition);
-        formData.append('action', 'editar');
-        formData.append('id', id);
+    const formData = new FormData(formEdition);
+    formData.append('action', 'editar');
+    formData.append('id', userId); // Enviar o ID do usuário
 
-        const data = {};
-        formData.forEach((value, key) => {
-            data[key] = value;
-        });
+    const data = {};
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
 
-        const response = await fetch('./usuarios.class.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
+    const response = await fetch('./usuarios.class.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
 
-        if (!response.ok) {
-            throw new Error('Erro ao salvar edição!');
-        } else {
-            window.location.href = './listagem.cadastros.php';
-        }
-
-        const responseData = await response.json();
-        console.log(responseData);
-        alert(responseData.message);
-    } catch (error) {
-        console.error('Erro no fetch:', error);
-        alert('Ocorreu um erro ao salvar edição do usuário.');
+    if (!response.ok) {
+        throw new Error('Erro ao salvar edição!');
+    } else {
+        window.location.href = './listagem.cadastros.php';
     }
+
+    const responseData = await response.json();
+    console.log(responseData);
+    alert(responseData.message);
+
 }
+
