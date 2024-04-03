@@ -93,7 +93,7 @@
 
 
 
-                    $usuarios = new User($conn);
+                    $usuarios = new User($pdo);
                     $usuarios = $user->listUsers();
 
                     if (is_array($usuarios) && !empty($usuarios)) {

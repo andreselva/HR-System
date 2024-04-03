@@ -3,30 +3,25 @@
 class Database
 {
 
-    private $conn;
+    private $pdo;
 
     public function __construct()
     {
-        define('HOST', 'localhost');
-        define('USER', 'root');
-        define('PASS', '123456');
-        define('BASE', 'sistema');
-        define('PORT', '3306');
+        $dsn = 'mysql:host=localhost;dbname=sistema';
+        $username = 'root';
+        $password = '123456';
 
-        $this->conn = new mysqli(HOST, USER, PASS, BASE, PORT);
-
-        if ($this->conn->connect_error) {
-            die("Connection failed: " . $this->conn->connect_error);
+        try {
+            $this->pdo = new PDO($dsn, $username, $password);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            echo 'Erro de conexão: ' . $e->getMessage();
         }
     }
 
     public function getConnection()
     {
-        return $this->conn;
+        return $this->pdo;
     }
-
-    public function closeConnection()
-    {
-        $this->conn->close();
-    }
+    
 }
