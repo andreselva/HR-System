@@ -3,37 +3,51 @@
 include __DIR__ . '/../../config/config.php';
 
 $database = new Database();
-$conn = $database->getConnection();
-$user = new User($conn);
+$pdo = $database->getConnection();
+$user = new User($pdo);
 
 class User
 {
-    private $conn;
+    private $pdo;
 
-    public function __construct($conn)
+    public function __construct($pdo)
     {
-        $this->conn = $conn;
+        $this->pdo = $pdo;
     }
 
     public function registerUser($data)
     {
-        // Utilize prepared statements para prevenir SQL Injection
-        $sql = "INSERT INTO usuarios (name, lastname, username, email, password, adress, complement, city, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        $stmt = $this->conn->prepare($sql);
+        try {
+            $sql = "INSERT INTO usuarios (name, lastname, username, email, password, adress, complement, city, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        // Bind dos parâmetros
-        $stmt->bind_param("sssssssss", $data['name'], $data['lastname'], $data['username'], $data['email'], $data['password'], $data['adress'], $data['complement'], $data['city'], $data['state']);
+            $stmt = $this->pdo->prepare($sql);
 
-        $res = $stmt->execute();
+            $stmt->bindParam(1, $data['name']);
+            $stmt->bindParam(2, $data['lastname']);
+            $stmt->bindParam(3, $data['username']);
+            $stmt->bindParam(4, $data['email']);
+            $stmt->bindParam(5, $data['password']);
+            $stmt->bindParam(6, $data['adress']);
+            $stmt->bindParam(7, $data['complement']);
+            $stmt->bindParam(8, $data['city']);
+            $stmt->bindParam(9, $data['state']);
 
-        if ($res === true) {
-            echo json_encode(array("message" => "Usuário cadastrado com sucesso!"));
-        } else {
-            echo json_encode(array("error" => "Erro no SQL: " . $stmt->error));
+            $res = $stmt->execute();
+
+            if ($res === true) {
+                echo json_encode(array("message" => "Usuário cadastrado com sucesso!"));
+                // Selecionar apenas as chaves necessárias para o log
+                $logData = array_intersect_key($data, array_flip(['name', 'lastname', 'username', 'email', 'password', 'adress', 'complement', 'city', 'state']));
+                // Converter o array associativo em uma string JSON
+                $logEntry = json_encode($logData);
+                // Escrever no arquivo de log
+                file_put_contents('./log.txt', "Usuário cadastrado: $logEntry\n", FILE_APPEND);
+            }
+        } catch (PDOException $e) {
+            $msg = $e->getMessage();
+            echo $msg;
         }
-
-        $stmt->close();
     }
 
 
@@ -43,15 +57,19 @@ class User
 
         $sql = "SELECT * FROM usuarios";
 
-        $res = $this->conn->query($sql);
-
-        if ($res->num_rows > 0) {
-            while ($row = $res->fetch_assoc()) {
-                $usuarios[] = $row;
+        $res = $this->pdo->query($sql);
+        try {
+            if ($res->rowCount() > 0) {
+                while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+                    $usuarios[] = $row;
+                }
+                return $usuarios;
+            } else {
+                echo "Nenhum usuário encontrado!";
             }
-            return $usuarios;
-        } else {
-            echo "Nenhum usuário encontrado!";
+        } catch (PDOException $e) {
+            $msg = $e->getMessage();
+            echo $msg;
         }
     }
 
@@ -60,8 +78,8 @@ class User
         try {
             if (isset($id)) {
                 $sql = "DELETE FROM usuarios WHERE id = ?";
-                $stmt = $this->conn->prepare($sql);
-                $stmt->bind_param("i", $id);
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->bindParam(1, $id, PDO::PARAM_INT);
 
                 if ($stmt->execute()) {
                     file_put_contents('./log.txt', "Usuário ID: $id excluído com sucesso\n", FILE_APPEND);
@@ -72,47 +90,63 @@ class User
             } else {
                 echo json_encode(array("error" => "ID não fornecido."));
             }
-        } catch (Exception $e) {
+        } catch (PDOException $e) {
             echo json_encode(array("error" => "Erro: " . $e->getMessage()));
-        } finally {
-            $stmt->close();
         }
     }
 
     public function obterUsuarioPorId($id)
     {
-        $sql = "SELECT * FROM usuarios WHERE id = {$id}";
-        $result = $this->conn->query($sql);
+        try {
+            $sql = "SELECT * FROM usuarios WHERE id = {$id}";
+            $res = $this->pdo->query($sql);
 
-        if ($result->num_rows > 0) {
-            return $result->fetch_assoc();
-        } else {
-            return null;
+            if ($res->rowCount() > 0) {
+                return $res->fetch(PDO::FETCH_ASSOC);
+            } else {
+                return null;
+            }
+        } catch (PDOException $e) {
+            $msg = $e->getMessage();
+            echo $msg;
         }
     }
 
     public function editarUsuario($id, $name, $lastname, $username, $email, $password, $adress, $complement, $city, $state)
     {
-        $sql = "UPDATE usuarios SET name=?, lastname=?, username=?, email=?, password=?, adress=?, complement=?, city=?, state=? WHERE id=?";
+        try {
+            $sql = "UPDATE usuarios SET name=?, lastname=?, username=?, email=?, password=?, adress=?, complement=?, city=?, state=? WHERE id=?";
 
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("sssssssssi", $name, $lastname, $username, $email, $password, $adress, $complement, $city, $state, $id);
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(1, $name);
+            $stmt->bindParam(2, $lastname);
+            $stmt->bindParam(3, $username);
+            $stmt->bindParam(4, $email);
+            $stmt->bindParam(5, $password);
+            $stmt->bindParam(6, $adress);
+            $stmt->bindParam(7, $complement);
+            $stmt->bindParam(8, $city);
+            $stmt->bindParam(9, $state);
+            $stmt->bindParam(10, $id);
 
-        $res = $stmt->execute();
+            $res = $stmt->execute();
 
-        if ($res == true) {
-            echo json_encode(array("message" => "Usuário alterado com sucesso!"));
-        } else {
-            echo json_encode(array("error" => "Ocorreu um erro ao tentar editar o usuário: " . $stmt->error));
+            if ($res == true) {
+                echo json_encode(array("message" => "Usuário alterado com sucesso!"));
+            } else {
+                echo json_encode(array("error" => "Ocorreu um erro ao tentar editar o usuário: " . $stmt->error));
+            }
+        } catch (PDOException $e) {
+            $msg = $e->getMessage();
+            echo $msg;
         }
-
-        $stmt->close();
-        
     }
 }
 
-function handlePostRequest($user) {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+function handlePostRequest($user)
+{
+    if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
         $json_data = file_get_contents("php://input");
         $data = json_decode($json_data, true);
 
