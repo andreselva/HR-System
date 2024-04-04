@@ -53,12 +53,12 @@ class User
 
     public function listUsers()
     {
-        $usuarios = array();
-
-        $sql = "SELECT * FROM usuarios";
-
-        $res = $this->pdo->query($sql);
         try {
+
+            $usuarios = array();
+            $sql = "SELECT * FROM usuarios";
+            $res = $this->pdo->query($sql);
+
             if ($res->rowCount() > 0) {
                 while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
                     $usuarios[] = $row;
