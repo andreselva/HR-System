@@ -7,8 +7,12 @@ function goToRegister() {
     window.location.href = './form.cadastro.usuarios.php';
 }
 
-function cancelEdit(event) {
+async function cancelEdit(event) {
     event.preventDefault();
+
+    const cancelar = await confirmSweet('Todas as alterações realizadas serão perdidas. Deseja continuar?', 'cancel');
+    if (!cancelar) return;
+
     window.location.href = './listagem.cadastros.php';
 }
 
@@ -16,16 +20,17 @@ async function confirmSweet(mensagem, tipo) {
     let resultado;
 
     if (tipo === 'saving') {
-        const { value: confirmado } = await Swal.fire({
-            icon: 'question',
-            title: 'Confirmação',
-            text: mensagem,
-            showCancelButton: true,
-            confirmButtonText: 'Sim',
-            cancelButtonText: 'Não',
-        });
+        const { value: salvar } =
+            await Swal.fire({
+                icon: 'question',
+                title: 'Confirmação',
+                text: mensagem,
+                showCancelButton: true,
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não',
+            });
 
-        resultado = confirmado;
+        resultado = salvar;
     }
 
     if (tipo === 'warning') {
@@ -43,16 +48,31 @@ async function confirmSweet(mensagem, tipo) {
     }
 
     if (tipo === 'warning_dois') {
-        const { value: aceitar } = await Swal.fire({
-            icon: 'warning',
-            title: 'Atenção!',
-            text: mensagem,
-            showCancelButton: false,
-            confirmButtonText: 'Ok',
-            cancelButtonText: 'Não',
-        });
+        const { value: aceitar } =
+            await Swal.fire({
+                icon: 'warning',
+                title: 'Atenção!',
+                text: mensagem,
+                showCancelButton: false,
+                confirmButtonText: 'Ok',
+                cancelButtonText: 'Não',
+            });
 
         resultado = aceitar;
+    }
+
+    if (tipo === 'cancel') {
+        const { value: cancelar } =
+            await Swal.fire({
+                icon: 'warning',
+                title: 'Atenção!',
+                text: mensagem,
+                showCancelButton: true,
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não',
+            })
+
+        resultado = cancelar;
     }
     return resultado;
 }
@@ -85,8 +105,8 @@ async function cadastrarUsuario(event) {
     }
 
     try {
-        const confirmado = await confirmSweet('O usuário será cadastrado. Deseja prosseguir?', 'saving');
-        if (!confirmado) return;
+        const salvar = await confirmSweet('O cliente será cadastrado. Deseja prosseguir?', 'saving');
+        if (!salvar) return;
 
         const formData = new FormData(form_cadastro);
         formData.append('action', 'cadastrar');
@@ -153,6 +173,7 @@ async function excluirUsuario(id, event) {
         if (!response.ok) {
             throw new Error('Erro ao excluir usuário!');
         }
+
         Swal.fire({
             title: "",
             text: 'Usuário excluído com sucesso!',
@@ -177,9 +198,8 @@ async function salvarEdicao(id, event) {
     const userId = document.querySelector('#userId').value;
 
     try {
-
-        const confirmado = await confirmSweet('Depois de salvar, todos os dados alterados serão salvos. Deseja continuar?', 'saving');
-        if (!confirmado) return;
+        const salvar = await confirmSweet('Todos os dados alterados serão salvos. Deseja continuar?', 'saving');
+        if (!salvar) return;
 
         const formData = new FormData(formEdition);
         formData.append('action', 'editar');
@@ -201,6 +221,7 @@ async function salvarEdicao(id, event) {
         if (!response.ok) {
             console.error('Erro ao salvar edição!');
         }
+        
         Swal.fire({
             title: "",
             text: 'Dados alterados!',

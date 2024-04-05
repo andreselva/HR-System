@@ -103,7 +103,7 @@ class User
         }
     }
 
-    public function obterUsuarioPorId($id)
+    public function getUserById($id)
     {
         try {
             $sql = "SELECT * FROM usuarios WHERE id = {$id}";
@@ -120,7 +120,7 @@ class User
         }
     }
 
-    public function editarUsuario($id, $name, $lastname, $username, $email, $password, $adress, $complement, $city, $state)
+    public function editUser($id, $name, $lastname, $username, $email, $password, $adress, $complement, $city, $state)
     {
         try {
             $sql = "UPDATE usuarios SET name=?, lastname=?, username=?, email=?, password=?, adress=?, complement=?, city=?, state=? WHERE id=?";

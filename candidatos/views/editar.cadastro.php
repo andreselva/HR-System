@@ -42,7 +42,7 @@
     }
 
 
-    $user = $user->obterUsuarioPorId($userId);
+    $user = $user->getUserById($userId);
 
     $name = $user['name'];
     $lastname = $user['lastname'];

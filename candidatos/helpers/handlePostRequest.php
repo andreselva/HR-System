@@ -26,7 +26,7 @@ class Request
             }
 
             if ($action == 'editar') {
-                $user->editarUsuario(
+                $user->editUser(
                     $data['id'],
                     $data['name'],
                     $data['lastname'],
