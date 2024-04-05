@@ -2,14 +2,15 @@
 
 
 
-<html lang="pt-br" data-bs-theme="dark">
+<html lang="pt-br" data-bs-theme="ligth">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap Demo</title>
+    <title>HR System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href=" sweetalert2/package/dist /sweetalert2.min.css">
 
     <style>
         .custom-sidebar {
@@ -40,7 +41,7 @@
         exit; // Saia do script para evitar processamento adicional
     }
 
-    
+
     $user = $user->obterUsuarioPorId($userId);
 
     $name = $user['name'];
@@ -76,7 +77,7 @@
                 </div>
             </nav>
             <!-- Barra de navegação lateral -->
-            <nav class="col-md-2 col-xxl-2 d-md-block bg-dark sidebar custom-sidebar">
+            <nav class="col-md-2 col-xxl-2 d-md-block bg-ligth sidebar custom-sidebar">
                 <div class="position-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
@@ -167,6 +168,7 @@
 
     <script src="form.cadastro.usuario.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="sweetalert2/package/dist /sweetalert2.min.js"></script>
 </body>
 
 </html>
