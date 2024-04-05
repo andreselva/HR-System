@@ -71,7 +71,7 @@ async function cadastrarUsuario(event) {
 
         if (!elemento) {
             console.error(`Elemento com ID '${campo}' não encontrado.`);
-            break;  // Pular para o próximo campo se o elemento não for encontrado
+            break;
         }
 
         const valor = elemento.value.trim();
@@ -118,7 +118,7 @@ async function cadastrarUsuario(event) {
             window.location.href = './listagem.cadastros.php';
         });
 
-        const responseData = await response.json(); // Aqui está a segunda chamada de response.json()
+        const responseData = await response.json();
         console.log(responseData);
 
     } catch (error) {
