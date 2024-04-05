@@ -76,7 +76,7 @@
                 </div>
             </nav>
             <!-- Barra de navegação lateral -->
-            <nav class="col-md-2 col-xxl-2 d-md-block bg-dark sidebar custom-sidebar">
+            <nav class="col-md-2 col-xxl-2 d-md-block bg-ligth sidebar custom-sidebar">
                 <div class="position-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
