@@ -19,6 +19,7 @@ class Request
 
                 if ($id == null) {
                     echo json_encode(array("error" => "ID não fornecido."));
+                    return;
                 }
 
                 $user->deleteUser($id);
