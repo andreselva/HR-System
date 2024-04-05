@@ -1,4 +1,1 @@
-Usuário ID: 107 excluído com sucesso
-Usuário ID: 106 excluído com sucesso
-Usuário ID: 105 excluído com sucesso
-Usuário cadastrado: {"name":"ANDRE","lastname":"SELVA","username":"teste","email":"selvaandre99@gmail.com","password":"teste","adress":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
+Usuário ID: 108 excluído com sucesso

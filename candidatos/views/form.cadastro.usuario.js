@@ -10,10 +10,17 @@ function goToRegister() {
 async function cancelEdit(event) {
     event.preventDefault();
 
-    const cancelar = await confirmSweet('Todas as alterações realizadas serão perdidas. Deseja continuar?', 'cancel');
-    if (!cancelar) return;
+    //Verifica se é a edição de um cadastro ou se é um novo cadastro. Se for um novo cadastro, não retorna o alert.
+    if (typeof window.location.search !== 'undefined' && window.location.search !== null) {
+        var params = new URLSearchParams(window.location.search);
+        if (params.has('id')) {
+            const cancelar = await confirmSweet('Todas as alterações realizadas serão perdidas. Deseja continuar?', 'cancel');
+            if (!cancelar) return;
+        }
 
-    window.location.href = './listagem.cadastros.php';
+        window.location.href = './listagem.cadastros.php';
+        
+    }
 }
 
 async function confirmSweet(mensagem, tipo) {
@@ -221,7 +228,7 @@ async function salvarEdicao(id, event) {
         if (!response.ok) {
             console.error('Erro ao salvar edição!');
         }
-        
+
         Swal.fire({
             title: "",
             text: 'Dados alterados!',
