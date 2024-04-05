@@ -39,12 +39,15 @@ class User
 
             $res = $stmt->execute();
 
-            if ($res === true) {
-                echo json_encode(array("message" => "Usuário cadastrado com sucesso!"));
-                $logData = array_intersect_key($data, array_flip(['name', 'lastname', 'username', 'email', 'password', 'adress', 'complement', 'city', 'state']));
-                $logEntry = json_encode($logData);
-                file_put_contents('./log.txt', "Usuário cadastrado: $logEntry\n", FILE_APPEND);
+            if (!$res === true) {
+                echo json_encode(array("message" => "Ocorreu um erro ao realizar o cadastro!"));
             }
+
+            echo json_encode(array("message" => "Usuário cadastrado com sucesso!"));
+            $logData = array_intersect_key($data, array_flip(['name', 'lastname', 'username', 'email', 'password', 'adress', 'complement', 'city', 'state']));
+            $logEntry = json_encode($logData);
+            file_put_contents('./log.txt', "Usuário cadastrado: $logEntry\n", FILE_APPEND);
+
         } catch (PDOException $e) {
             $msg = $e->getMessage();
             echo $msg;
@@ -56,7 +59,7 @@ class User
     {
         try {
             $usuarios = array();
-            $sql = "SELECT * FROM usuarios";
+            $sql = "SELECT * FROM usuarios ORDER BY id desc";
             $res = $this->pdo->query($sql);
 
             if ($res->rowCount() === 0 || $res->rowCount() === '') {
@@ -111,7 +114,6 @@ class User
             }
 
             return $res->fetch(PDO::FETCH_ASSOC);
-            
         } catch (PDOException $e) {
             $msg = $e->getMessage();
             echo $msg;
@@ -142,7 +144,6 @@ class User
             }
 
             echo json_encode(array("message" => "Usuário alterado com sucesso!"));
-
         } catch (PDOException $e) {
             $msg = $e->getMessage();
             echo $msg;
