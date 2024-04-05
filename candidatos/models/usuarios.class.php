@@ -41,11 +41,8 @@ class User
 
             if ($res === true) {
                 echo json_encode(array("message" => "Usuário cadastrado com sucesso!"));
-                // Selecionar apenas as chaves necessárias para o log
                 $logData = array_intersect_key($data, array_flip(['name', 'lastname', 'username', 'email', 'password', 'adress', 'complement', 'city', 'state']));
-                // Converter o array associativo em uma string JSON
                 $logEntry = json_encode($logData);
-                // Escrever no arquivo de log
                 file_put_contents('./log.txt', "Usuário cadastrado: $logEntry\n", FILE_APPEND);
             }
         } catch (PDOException $e) {
@@ -58,19 +55,20 @@ class User
     public function listUsers()
     {
         try {
-
             $usuarios = array();
             $sql = "SELECT * FROM usuarios";
             $res = $this->pdo->query($sql);
 
-            if ($res->rowCount() > 0) {
-                while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
-                    $usuarios[] = $row;
-                }
-                return $usuarios;
-            } else {
+            if ($res->rowCount() === 0 || $res->rowCount() === '') {
                 echo "Nenhum usuário encontrado!";
+                return;
             }
+
+            while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+                $usuarios[] = $row;
+            }
+
+            return $usuarios;
         } catch (PDOException $e) {
             $msg = $e->getMessage();
             echo $msg;
@@ -80,20 +78,23 @@ class User
     public function deleteUser($id)
     {
         try {
-            if (isset($id)) {
-                $sql = "DELETE FROM usuarios WHERE id = ?";
-                $stmt = $this->pdo->prepare($sql);
-                $stmt->bindParam(1, $id, PDO::PARAM_INT);
-
-                if ($stmt->execute()) {
-                    file_put_contents('./log.txt', "Usuário ID: $id excluído com sucesso\n", FILE_APPEND);
-                    echo json_encode(array("message" => "Usuário deletado com sucesso!"));
-                } else {
-                    echo json_encode(array("error" => "Ocorreu um erro ao excluir o usuário."));
-                }
-            } else {
-                echo json_encode(array("error" => "ID não fornecido."));
+            if (!isset($id)) {
+                echo "Erro ao realizar exclusão. O ID do usuário não está presente!";
+                return;
             }
+
+            $sql = "DELETE FROM usuarios WHERE id = ?";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(1, $id, PDO::PARAM_INT);
+            $res = $stmt->execute();
+
+            if (!$res === true) {
+                echo json_encode(array("error" => "Ocorreu um erro ao excluir o usuário."));
+                return;
+            }
+
+            file_put_contents('./log.txt', "Usuário ID: $id excluído com sucesso\n", FILE_APPEND);
+            echo json_encode(array("message" => "Usuário deletado com sucesso!"));
         } catch (PDOException $e) {
             echo json_encode(array("error" => "Erro: " . $e->getMessage()));
         }
@@ -105,11 +106,12 @@ class User
             $sql = "SELECT * FROM usuarios WHERE id = {$id}";
             $res = $this->pdo->query($sql);
 
-            if ($res->rowCount() > 0) {
-                return $res->fetch(PDO::FETCH_ASSOC);
-            } else {
+            if ($res->rowCount() == 0 || $res->rowCount() == '') {
                 return null;
             }
+
+            return $res->fetch(PDO::FETCH_ASSOC);
+            
         } catch (PDOException $e) {
             $msg = $e->getMessage();
             echo $msg;
@@ -135,11 +137,12 @@ class User
 
             $res = $stmt->execute();
 
-            if ($res == true) {
-                echo json_encode(array("message" => "Usuário alterado com sucesso!"));
-            } else {
+            if (!$res == true) {
                 echo json_encode(array("error" => "Ocorreu um erro ao tentar editar o usuário: " . $stmt->error));
             }
+
+            echo json_encode(array("message" => "Usuário alterado com sucesso!"));
+
         } catch (PDOException $e) {
             $msg = $e->getMessage();
             echo $msg;
