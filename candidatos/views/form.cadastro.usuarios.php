@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" data-bs-theme="ligth">
+<html lang="pt-br" data-bs-theme="light">
 
 <head>
     <meta charset="utf-8">
@@ -42,7 +42,7 @@
                 </div>
             </nav>
             <!-- Barra de navegação lateral -->
-            <nav class="col-md-2 col-xxl-2 d-md-block bg-ligth   sidebar custom-sidebar">
+            <nav class="col-md-2 col-xxl-2 d-md-block bg-light sidebar custom-sidebar">
                 <div class="position-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
@@ -105,7 +105,7 @@
                         </div>
                         <div class="col-7">
                             <label for="address" class="form-label">Endereço</label>
-                            <input type="text" class="form-control" id="adress" name="adress" required>
+                            <input type="text" class="form-control" id="address" name="address" required>
                         </div>
                         <div class="col-5">
                             <label for="complement" class="form-label">Complemento</label>
@@ -133,7 +133,7 @@
 
     <script src="form.cadastro.usuario.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="sweetalert2/package/dist /sweetalert2.min.js"></script>
+    <script src="sweetalert2/package/dist/sweetalert2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
