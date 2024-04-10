@@ -11,7 +11,7 @@ class Request
             $action = isset($data['action']) ? $data['action'] : null;
 
             if ($action == 'cadastrar') {
-                $user->registerUser($data);
+                $user->registerCandidate($data);
             }
 
             if ($action == 'excluir') {
@@ -22,18 +22,18 @@ class Request
                     return;
                 }
 
-                $user->deleteUser($id);
+                $user->deleteCandidate($id);
             }
 
             if ($action == 'editar') {
-                $user->editUser(
+                $user->editCandidate(
                     $data['id'],
                     $data['name'],
                     $data['lastname'],
                     $data['username'],
                     $data['email'],
                     $data['password'],
-                    $data['adress'],
+                    $data['address'],
                     $data['complement'],
                     $data['city'],
                     $data['state']

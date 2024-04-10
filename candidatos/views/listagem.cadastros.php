@@ -90,12 +90,12 @@
                 <form id="listUserForm" method="post">
                     <?php
 
-                    include __DIR__ . '/../models/usuarios.class.php';
+                    include __DIR__ . '/../models/candidatos.class.php';
 
 
 
-                    $usuarios = new User($pdo);
-                    $usuarios = $user->listUsers();
+                    $usuarios = new Candidate($pdo);
+                    $usuarios = $candidate  ->listCandidates();
 
                     if (is_array($usuarios) && !empty($usuarios)) {
                         echo "<div class='container mt-4'>";
@@ -118,7 +118,7 @@
                 <td>{$row['name']}</td>
                 <td>{$row['lastname']}</td>
                 <td>{$row['email']}</td>
-                <td>{$row['adress']}</td>
+                <td>{$row['address']}</td>
                 <td>{$row['complement']}</td>
                 <td>{$row['city']}</td>
                 <td>{$row['state']}</td>

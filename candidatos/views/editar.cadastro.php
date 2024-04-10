@@ -30,7 +30,7 @@
 <body>
     <?php
 
-    include __DIR__ . '/../models/usuarios.class.php';
+    include __DIR__ . '/../models/candidatos.class.php';
 
     // Verifique se o ID do usuário foi passado via GET na URL
     if (isset($_GET['id'])) {
@@ -42,17 +42,17 @@
     }
 
 
-    $user = $user->getUserById($userId);
+    $candidate = $candidate->getCandidateById($userId);
 
-    $name = $user['name'];
-    $lastname = $user['lastname'];
-    $username = $user['username'];
-    $email = $user['email'];
-    $password = $user['password'];
-    $adress = $user['adress'];
-    $complement = $user['complement'];
-    $city = $user['city'];
-    $state = $user['state'];
+    $name = $candidate['name'];
+    $lastname = $candidate['lastname'];
+    $username = $candidate['username'];
+    $email = $candidate['email'];
+    $password = $candidate['password'];
+    $address = $candidate['address'];
+    $complement = $candidate['complement'];
+    $city = $candidate['city'];
+    $state = $candidate['state'];
 
     ?>
 
@@ -140,7 +140,7 @@
                         </div>
                         <div class="col-7">
                             <label for="address" class="form-label">Endereço</label>
-                            <input type="text" class="form-control" id="adress" name="adress" value="<?php echo $adress; ?>" required>
+                            <input type="text" class="form-control" id="address" name="address" value="<?php echo $address; ?>" required>
                         </div>
                         <div class="col-5">
                             <label for="complement" class="form-label">Complemento</label>

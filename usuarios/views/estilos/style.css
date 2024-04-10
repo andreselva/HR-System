@@ -1,0 +1,35 @@
+#nav-cabecalho {
+    background-color: black;
+}
+
+#nav-lateral {
+    height: 100vh;
+}
+
+#h2-cadastro-usuario {
+    padding-bottom: 20px;
+}
+
+#form-usuarios {
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    margin: auto;
+    width: 700px;
+}
+
+#abas {
+    display: flex;
+    gap: 50px;
+    padding-bottom: 25px;
+}
+
+#abas button {
+    border: none;   
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+    outline: none;
+}
