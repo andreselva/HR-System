@@ -125,7 +125,7 @@ async function cadastrarUsuario(event) {
             data[key] = value;
         });
 
-        const response = await fetch('../models/usuarios.class.php', {
+        const response = await fetch('../models/candidatos.class.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -169,7 +169,7 @@ async function excluirUsuario(id, event) {
             id: id,
         };
 
-        const response = await fetch('../models/usuarios.class.php', {
+        const response = await fetch('../models/candidatos.class.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -217,7 +217,7 @@ async function salvarEdicao(id, event) {
             data[key] = value;
         });
 
-        const response = await fetch('../models/usuarios.class.php', {
+        const response = await fetch('../models/candidatos.class.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

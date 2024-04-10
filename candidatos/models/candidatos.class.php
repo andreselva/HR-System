@@ -5,12 +5,12 @@ include __DIR__ . '/../helpers/handlePostRequest.php';
 
 $database = new Database();
 $pdo = $database->getConnection();
-$user = new User($pdo);
-
+$candidate = new Candidate($pdo);
+    
 $request = new Request();
-$request->handlePostRequest($user);
+$request->handlePostRequest($candidate);
 
-class User
+class Candidate
 {
     private $pdo;
 
@@ -19,11 +19,11 @@ class User
         $this->pdo = $pdo;
     }
 
-    public function registerUser($data)
+    public function registerCandidate($data)
     {
 
         try {
-            $sql = "INSERT INTO usuarios (name, lastname, username, email, password, adress, complement, city, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO candidates (name, lastname, username, email, password, address, complement, city, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $stmt = $this->pdo->prepare($sql);
 
@@ -32,7 +32,7 @@ class User
             $stmt->bindParam(3, $data['username']);
             $stmt->bindParam(4, $data['email']);
             $stmt->bindParam(5, $data['password']);
-            $stmt->bindParam(6, $data['adress']);
+            $stmt->bindParam(6, $data['address']);
             $stmt->bindParam(7, $data['complement']);
             $stmt->bindParam(8, $data['city']);
             $stmt->bindParam(9, $data['state']);
@@ -44,7 +44,7 @@ class User
             }
 
             echo json_encode(array("message" => "Usuário cadastrado com sucesso!"));
-            $logData = array_intersect_key($data, array_flip(['name', 'lastname', 'username', 'email', 'password', 'adress', 'complement', 'city', 'state']));
+            $logData = array_intersect_key($data, array_flip(['name', 'lastname', 'username', 'email', 'password', 'address', 'complement', 'city', 'state']));
             $logEntry = json_encode($logData);
             file_put_contents('./log.txt', "Usuário cadastrado: $logEntry\n", FILE_APPEND);
 
@@ -55,11 +55,11 @@ class User
     }
 
 
-    public function listUsers()
+    public function listCandidates()
     {
         try {
-            $usuarios = array();
-            $sql = "SELECT * FROM usuarios ORDER BY id desc";
+            $candidatos = array();
+            $sql = "SELECT * FROM candidates ORDER BY id desc";
             $res = $this->pdo->query($sql);
 
             if ($res->rowCount() === 0 || $res->rowCount() === '') {
@@ -68,17 +68,17 @@ class User
             }
 
             while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
-                $usuarios[] = $row;
+                $candidatos[] = $row;
             }
 
-            return $usuarios;
+            return $candidatos;
         } catch (PDOException $e) {
             $msg = $e->getMessage();
             echo $msg;
         }
     }
 
-    public function deleteUser($id)
+    public function deleteCandidate($id)
     {
         try {
             if (!isset($id)) {
@@ -86,7 +86,7 @@ class User
                 return;
             }
 
-            $sql = "DELETE FROM usuarios WHERE id = ?";
+            $sql = "DELETE FROM candidates WHERE id = ?";
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(1, $id, PDO::PARAM_INT);
             $res = $stmt->execute();
@@ -103,10 +103,10 @@ class User
         }
     }
 
-    public function getUserById($id)
+    public function getCandidateById($id)
     {
         try {
-            $sql = "SELECT * FROM usuarios WHERE id = {$id}";
+            $sql = "SELECT * FROM candidates WHERE id = {$id}";
             $res = $this->pdo->query($sql);
 
             if ($res->rowCount() == 0 || $res->rowCount() == '') {
@@ -120,10 +120,10 @@ class User
         }
     }
 
-    public function editUser($id, $name, $lastname, $username, $email, $password, $adress, $complement, $city, $state)
+    public function editCandidate($id, $name, $lastname, $username, $email, $password, $address, $complement, $city, $state)
     {
         try {
-            $sql = "UPDATE usuarios SET name=?, lastname=?, username=?, email=?, password=?, adress=?, complement=?, city=?, state=? WHERE id=?";
+            $sql = "UPDATE candidates SET name=?, lastname=?, username=?, email=?, password=?, address=?, complement=?, city=?, state=? WHERE id=?";
 
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(1, $name);
@@ -131,7 +131,7 @@ class User
             $stmt->bindParam(3, $username);
             $stmt->bindParam(4, $email);
             $stmt->bindParam(5, $password);
-            $stmt->bindParam(6, $adress);
+            $stmt->bindParam(6, $address);
             $stmt->bindParam(7, $complement);
             $stmt->bindParam(8, $city);
             $stmt->bindParam(9, $state);

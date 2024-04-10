@@ -1,3 +1,12 @@
 Usuário ID: 108 excluído com sucesso
 Usuário ID: 113 excluído com sucesso
 Usuário cadastrado: {"name":"ANDRE","lastname":"SELVA","username":"teste","email":"selvaandre99@gmail.com","password":"1231232","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS","adress":null}
+Usuário cadastrado: {"name":"ANDRE","lastname":"SELVA","username":"teste","email":"selvaandre99@gmail.com","password":"teste","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
+Usuário ID: 1 excluído com sucesso
+Usuário cadastrado: {"name":"ANDRE","lastname":"SELVA","username":"TESTE","email":"selvaandre99@gmail.com","password":"TESTE","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
+Usuário cadastrado: {"name":"ANDRE 2","lastname":"SELVA","username":"TES","email":"selvaandre99@gmail.com","password":"TESTE","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
+Usuário ID: 2 excluído com sucesso
+Usuário ID: 3 excluído com sucesso
+Usuário cadastrado: {"name":"ANDRE","lastname":"SELVA","username":"TESTE","email":"selvaandre99@gmail.com","password":"TESTE","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
+Usuário cadastrado: {"name":"ANDRE 2","lastname":"SELVA","username":"TE","email":"selvaandre99@gmail.com","password":"TESTE","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
+Usuário cadastrado: {"name":"ANDRE 34434343","lastname":"SELVA","username":"dsada","email":"selvaandre99@gmail.com","password":"dasdasd","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
