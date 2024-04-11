@@ -43,7 +43,7 @@ class Candidate
                 echo json_encode(array("message" => "Ocorreu um erro ao realizar o cadastro!"));
             }
 
-            echo json_encode(array("message" => "Usuário cadastrado com sucesso!"));
+            echo json_encode(array("message" => "Cadastrado com sucesso!"));
             $logData = array_intersect_key($data, array_flip(['name', 'lastname', 'username', 'email', 'password', 'address', 'complement', 'city', 'state']));
             $logEntry = json_encode($logData);
             file_put_contents('./log.txt', "Usuário cadastrado: $logEntry\n", FILE_APPEND);
