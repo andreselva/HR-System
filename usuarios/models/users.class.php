@@ -40,8 +40,37 @@ class Usuario
 
         } catch (PDOException $e) {
             $msg = $e->getMessage();
-            echo $msg;
+            file_put_contents('./log.txt', $msg, FILE_APPEND);
         }
     }
 
+
+    public function deleteUser($id) 
+    {
+        if(!isset($id)) {
+            echo json_encode(array("message" => "Id do usuário a ser deletado não está presente."));
+            return;
+        }
+    
+        try {
+            $sql = "DELETE FROM users WHERE id = ?";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(1, $id, PDO::PARAM_INT);
+
+            $res = $stmt->execute();
+
+            if (!$res === true) {
+                echo json_econde(array("message" => "Erro ao excluir o usuário. Verifique o backend."));
+                return;
+            }
+
+            echo json_encode(array("message" => "Usuário excluído!"));
+
+        } catch (PDOException $e) {
+            $msg = $e->getMessage();
+            file_put_contents('./log.txt', $msg, FILE_APPEND);
+        }
+    }
+    
 }
+
