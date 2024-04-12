@@ -39,7 +39,7 @@ class Candidate
 
             $res = $stmt->execute();
 
-            if (!$res === true) {
+            if ($res !== true) {
                 echo json_encode(array("message" => "Ocorreu um erro ao realizar o cadastro!"));
             }
 
@@ -55,11 +55,11 @@ class Candidate
     }
 
 
-    public function listCandidates()
+    protected function listCandidates()
     {
         try {
             $candidatos = array();
-            $sql = "SELECT * FROM candidates ORDER BY id desc";
+            $sql = "SELECT * FROM candidates ORDER BY id DESC";
             $res = $this->pdo->query($sql);
 
             if ($res->rowCount() === 0 || $res->rowCount() === '') {
@@ -72,6 +72,7 @@ class Candidate
             }
 
             return $candidatos;
+
         } catch (PDOException $e) {
             $msg = $e->getMessage();
             echo $msg;
@@ -91,13 +92,14 @@ class Candidate
             $stmt->bindParam(1, $id, PDO::PARAM_INT);
             $res = $stmt->execute();
 
-            if (!$res === true) {
+            if ($res !== true) {
                 echo json_encode(array("error" => "Ocorreu um erro ao excluir o usuário."));
                 return;
             }
 
             file_put_contents('./log.txt', "Usuário ID: $id excluído com sucesso\n", FILE_APPEND);
             echo json_encode(array("message" => "Usuário deletado com sucesso!"));
+
         } catch (PDOException $e) {
             echo json_encode(array("error" => "Erro: " . $e->getMessage()));
         }
@@ -106,7 +108,7 @@ class Candidate
     public function getCandidateById($id)
     {
         try {
-            $sql = "SELECT * FROM candidates WHERE id = {$id}";
+            $sql = "SELECT * FROM candidates WHERE id = ?";
             $res = $this->pdo->query($sql);
 
             if ($res->rowCount() == 0 || $res->rowCount() == '') {
@@ -114,6 +116,7 @@ class Candidate
             }
 
             return $res->fetch(PDO::FETCH_ASSOC);
+
         } catch (PDOException $e) {
             $msg = $e->getMessage();
             echo $msg;
@@ -139,7 +142,7 @@ class Candidate
 
             $res = $stmt->execute();
 
-            if (!$res == true) {
+            if ($res !== true) {
                 echo json_encode(array("error" => "Ocorreu um erro ao tentar editar o usuário: " . $stmt->error));
             }
 
