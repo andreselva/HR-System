@@ -3,7 +3,8 @@ function goToEdition(id, event) {
     window.location.href = './editar.cadastro.php?id=' + id;
 }
 
-function goToRegister() {
+function goToRegister(event) {
+    event.preventDefault();
     window.location.href = './form.cadastro.usuarios.php';
 }
 

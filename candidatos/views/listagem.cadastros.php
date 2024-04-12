@@ -3,11 +3,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" style="background-color: #222831;">
     <title>HR System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
-    
+    <link rel="stylesheet" href="estilos/style.css">
 
 
     <style>
@@ -31,7 +31,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <nav class="navbar navbar-expand-lg" id="nav-principal">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -39,55 +39,50 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <span class="navbar-brand">Sistema de RH</span>
+                                <span class="navbar-brand" id="hr-system">Sistema de RH</span>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
             <!-- Barra de navegação lateral -->
-            <nav class="col-md-2 col-xxl-2 d-md-block sidebar custom-sidebar">
-                <div class="position-sticky">
+            <nav class="col-md-2 col-xxl-2 d-md-block sidebar custom-sidebar" id="nav-lateral">
+                <div class="position-sticky" id="elementos-nav-lateral">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="collapse" href="#cadastrosMenu">
+                            <a class="nav-link" data-bs-toggle="collapse" href="#cadastrosMenu" id="elem-nav-lat">
                                 Cadastros
                                 <i class="fas fa-chevron-down"></i>
                             </a>
                             <div class="collapse" id="cadastrosMenu">
                                 <ul class="nav flex-column ml-3">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Candidatos</a>
+                                        <a class="nav-link" href="#" id="elem-nav-lat">Candidatos</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Vagas</a>
+                                        <a class="nav-link" href="#" id="elem-nav-lat">Vagas</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Configurações <i class="fas fa-cogs"></i></a>
+                            <a class="nav-link" href="#" id="elem-nav-lat">Configurações <i class="fas fa-cogs" id="elem-nav-lat"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Relatórios <i class="fas fa-chart-bar"></i></a>
+                            <a class="nav-link" href="#" id="elem-nav-lat">Relatórios <i class="fas fa-chart-bar" id="elem-nav-lat"></i></a>
                         </li>
                         <!-- Adicione mais itens de navegação conforme necessário -->
                     </ul>
                 </div>
             </nav>
             <!-- Conteúdo principal -->
-            <main class="col-md-10 custom-main">
-                <br>
-                <div class="container-sm">
-                    <h2>Candidatos</h2>
-                </div>
-                <br>
+            <main class="col-md-10 custom-main" id="main-form-user">
 
-                <div class="container-sm">
-                    <button type="submit" class="btn btn-primary" onclick="goToRegister()">Cadastrar</button>
-                </div>
-                <br>
                 <form id="listUserForm" method="post">
+                    <h5 style="padding-bottom: 40px;">Candidatos</h5>
+                    <div id="btn-register-user">
+                        <button type="submit" class="btn btn-primary" onclick="goToRegister(event)">Cadastrar</button>
+                    </div>
                     <?php
 
                     include __DIR__ . '/../models/candidatos.class.php';
@@ -95,46 +90,54 @@
 
 
                     $usuarios = new Candidate($pdo);
-                    $usuarios = $candidate  ->listCandidates();
+                    $usuarios = $candidate->listCandidates();
 
                     if (is_array($usuarios) && !empty($usuarios)) {
-                        echo "<div class='container mt-4'>";
-                        echo "<table class='table table-bordered'>";
+                        echo "<div style='padding-top: 10px;'>";
+                        echo "<table class='table table-bordered' id='table-users'>";
                         echo "<thead>
-            <tr>
-                <th>Nome</th>
-                <th>Sobrenome</th>
-                <th>E-mail</th>
-                <th>Endereço</th>
-                <th>Complemento</th>
-                <th>Cidade</th>
-                <th>Estado</th>
-                <th>Ações</th>
-            </tr>
-          </thead>";
+                                <tr>
+                                    <th>
+                                        <div class='form-check' id='checkbox-table'>
+                                            <input class='form-check-input' type='checkbox' value='' id='flexCheckDefault'>
+                                            <label class='form-check-label' for='flexCheckDefault'></label>
+                                        </div>
+                                    </th>
+                                    <th>Nome</th>
+                                    <th>Sobrenome</th>
+                                    <th>E-mail</th>
+                                    <th>Endereço</th>
+                                    <th>Complemento</th>
+                                    <th>Cidade</th>
+                                    <th>Estado</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>";
 
                         foreach ($usuarios as $row) {
                             echo "<tr>
-                <td>{$row['name']}</td>
-                <td>{$row['lastname']}</td>
-                <td>{$row['email']}</td>
-                <td>{$row['address']}</td>
-                <td>{$row['complement']}</td>
-                <td>{$row['city']}</td>
-                <td>{$row['state']}</td>
-                <td> 
-                    <button class='btn btn-primary' onclick='goToEdition({$row['id']}, event)'>Editar</button>
-                    <button class='btn btn-danger' onclick='excluirUsuario({$row['id']}, event)'>Excluir</button>
-                </td>
-                    
-              
-              </tr>";
+                                    <td>
+                                        <div class='form-check' id='checkbox-table'>
+                                            <input class='form-check-input' type='checkbox' value='' id='flexCheckDefault'>
+                                            <label class='form-check-label' for='flexCheckDefault'></label>
+                                        </div>
+                                    </td>
+                                    <td>{$row['name']}</td>
+                                    <td>{$row['lastname']}</td>
+                                    <td>{$row['email']}</td>
+                                    <td>{$row['address']}</td>
+                                    <td>{$row['complement']}</td>
+                                    <td>{$row['city']}</td>
+                                    <td>{$row['state']}</td>
+                                    <td> 
+                                        <button class='btn btn-primary' onclick='goToEdition({$row['id']}, event)'>Editar</button>
+                                        <button class='btn btn-danger' onclick='excluirUsuario({$row['id']}, event)'>Excluir</button>
+                                    </td>
+                                </tr>";
                         }
-
                         echo "</table>";
                         echo "</div>";
                     }
-
                     ?>
                 </form>
 

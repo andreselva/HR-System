@@ -55,7 +55,7 @@ class Candidate
     }
 
 
-    protected function listCandidates()
+    public function listCandidates()
     {
         try {
             $candidatos = array();
@@ -63,7 +63,7 @@ class Candidate
             $res = $this->pdo->query($sql);
 
             if ($res->rowCount() === 0 || $res->rowCount() === '') {
-                echo "Nenhum usuário encontrado!";
+                echo "Nenhum candidato encontrado!";
                 return;
             }
 
@@ -109,13 +109,17 @@ class Candidate
     {
         try {
             $sql = "SELECT * FROM candidates WHERE id = ?";
-            $res = $this->pdo->query($sql);
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(1, $id, PDO::PARAM_INT);
+            $stmt->execute();
 
-            if ($res->rowCount() == 0 || $res->rowCount() == '') {
+            $candidate = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if(!$candidate) {
                 return null;
             }
 
-            return $res->fetch(PDO::FETCH_ASSOC);
+            return $candidate;
 
         } catch (PDOException $e) {
             $msg = $e->getMessage();
