@@ -7,8 +7,25 @@
     --opacity-secondary: 0.2;
 }
 
+.custom-sidebar {
+    width: 200px;
+    /* Ajuste a largura conforme necessário */
+}
+
+.custom-main {
+    flex: 0 0 80%;
+    /* Ajuste a largura conforme necessário */
+    max-width: 100%;
+    /* Ajuste a largura conforme necessário */
+}
+
 body {
     background-color: var(--background-color);
+}
+
+#checkbox-table {
+    display: flex;
+    justify-content: center;
 }
 
 #nav-principal {
@@ -42,12 +59,45 @@ body {
     padding: 15px;
 }
 
+#main-form-user-edit {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    margin: auto;
+    height: 100vh;
+    padding: 15px;
+    padding-top: 30px;
+}
+
 #listUserForm {
+    background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
     align-items: left;
     height: 100vh;
+    border-radius: 8px;
+    padding: 40px;
+    width: 100%;
+}
+
+#editUserForm {
     background-color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    /* height: 100vh; */
+    border-radius: 8px;
+    padding: 40px;
+    width: 100%;
+}
+
+#userForm {
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    /* height: 100vh; */
     border-radius: 8px;
     padding: 40px;
     width: 100%;
@@ -56,10 +106,4 @@ body {
 #table-users {
     text-align: center;
     align-items: center;
-    border-radius: 10px;
-}
-
-#checkbox-table {
-    display: flex;
-    justify-content: center;
 }

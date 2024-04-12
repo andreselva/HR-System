@@ -13,7 +13,7 @@ async function cancelEdit(event) {
 
     //Verifica se é a edição de um cadastro ou se é um novo cadastro. Se for um novo cadastro, não retorna o alert.
     if (typeof window.location.search !== 'undefined' && window.location.search !== null) {
-        var params = new URLSearchParams(window.location.search);
+        let params = new URLSearchParams(window.location.search);
         if (params.has('id')) {
             const cancelar = await confirmSweet('Todas as alterações realizadas serão perdidas. Deseja continuar?', 'cancel');
             if (!cancelar) return;
@@ -85,6 +85,11 @@ async function confirmSweet(mensagem, tipo) {
     return resultado;
 }
 
+function formatarCPF(input) {
+    let cpf = input.value.replace(/\D/g, '');
+    cpf = cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
+    input.value = cpf;
+}
 
 async function cadastrarUsuario(event) {
     let campoVazio = null;

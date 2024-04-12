@@ -9,22 +9,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="estilos/style.css">
 
-
-    <style>
-        .custom-sidebar {
-            width: 200px;
-            /* Ajuste a largura conforme necessário */
-        }
-
-        .custom-main {
-            flex: 0 0 80%;
-            /* Ajuste a largura conforme necessário */
-            max-width: 100%;
-            /* Ajuste a largura conforme necessário */
-        }
-    </style>
-
-
 </head>
 
 <body>
@@ -71,15 +55,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#" id="elem-nav-lat">Relatórios <i class="fas fa-chart-bar" id="elem-nav-lat"></i></a>
                         </li>
-                        <!-- Adicione mais itens de navegação conforme necessário -->
+
                     </ul>
                 </div>
             </nav>
             <!-- Conteúdo principal -->
             <main class="col-md-10 custom-main" id="main-form-user">
-
                 <form id="listUserForm" method="post">
-                    <h5 style="padding-bottom: 40px;">Candidatos</h5>
+                    <h4 style="padding-bottom: 40px;">Candidatos</h4>
                     <div id="btn-register-user">
                         <button type="submit" class="btn btn-primary" onclick="goToRegister(event)">Cadastrar</button>
                     </div>
@@ -88,13 +71,13 @@
                     include __DIR__ . '/../models/candidatos.class.php';
 
 
-
                     $usuarios = new Candidate($pdo);
                     $usuarios = $candidate->listCandidates();
 
+
                     if (is_array($usuarios) && !empty($usuarios)) {
-                        echo "<div style='padding-top: 10px;'>";
-                        echo "<table class='table table-bordered' id='table-users'>";
+                        echo "<div class='table-container' style='padding-top: 10px;' id='table-users'>";
+                        echo "<table class='table table-bordered table-rounded'";
                         echo "<thead>
                                 <tr>
                                     <th>
@@ -140,7 +123,6 @@
                     }
                     ?>
                 </form>
-
             </main>
         </div>
     </div>

@@ -10,19 +10,7 @@
     <link rel="stylesheet" href="sweetalert2/package/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="estilos/style.css">
 
-    <style>
-        .custom-sidebar {
-            width: 200px;
-            /* Ajuste a largura conforme necessário */
-        }
-
-        .custom-main {
-            flex: 0 0 80%;
-            /* Ajuste a largura conforme necessário */
-            max-width: 100%;
-            /* Ajuste a largura conforme necessário */
-        }
-    </style>
+    
 </head>
 
 <body>

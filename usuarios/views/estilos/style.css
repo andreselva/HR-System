@@ -1,35 +1,109 @@
-#nav-cabecalho {
-    background-color: black;
+:root {
+    --background-color: #EEEEEE;
+    --primary-color: #222831;
+    --secondary-color: #31363F;
+    --text-color: #FFFFFF;
+    --opacity-primary: 0.7;
+    --opacity-secondary: 0.2;
+}
+
+.custom-sidebar {
+    width: 200px;
+}
+
+.custom-main {
+    flex: 0 0 80%;
+    max-width: 100%;
+}
+
+body {
+    background-color: var(--background-color);
+}
+
+#checkbox-table {
+    display: flex;
+    justify-content: center;
+}
+
+#nav-principal {
+    height: 7vh;
+    background-color: var(--primary-color);
+    opacity: var(--opacity-primary);
+}
+
+#hr-system {
+    color: var(--text-color);
 }
 
 #nav-lateral {
     height: 100vh;
+    background-color: var(--secondary-color);
+    opacity: var(--opacity-secondary);
+    color: var(--text-color);
 }
 
-#h2-cadastro-usuario {
-    padding-bottom: 20px;
+#elem-nav-lat {
+    color: var(--text-color);
 }
 
-#form-usuarios {
-    padding-bottom: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 5px;
-    margin: auto;
-    width: 700px;
-}
-
-#abas {
+#main-form-user {
     display: flex;
-    gap: 50px;
-    padding-bottom: 25px;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    margin: auto;
+    height: 100vh;
+    padding: 15px;
 }
 
-#abas button {
-    border: none;   
-    background-color: transparent;
-    cursor: pointer;
-    padding: 0;
-    font: inherit;
-    outline: none;
+#main-form-user-edit {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    margin: auto;
+    height: 100vh;
+    padding: 15px;
+    padding-top: 30px;
 }
+
+#listUserForm {
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    height: 100vh;
+    border-radius: 8px;
+    padding: 40px;
+    width: 100%;
+}
+
+#editUserForm {
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    /* height: 100vh; */
+    border-radius: 8px;
+    padding: 40px;
+    width: 100%;
+}
+
+#userForm {
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    /* height: 100vh; */
+    border-radius: 8px;
+    padding: 40px;
+    width: 100%; 
+}
+
+#table-users {
+    text-align: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+

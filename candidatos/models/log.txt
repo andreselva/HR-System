@@ -16,3 +16,5 @@ Usuário ID: 4 excluído com sucesso
 Usuário cadastrado: {"name":"ANDRE","lastname":"SELVA","username":"tes","email":"selvaandre99@gmail.com","password":"teste","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
 Usuário ID: 7 excluído com sucesso
 Usuário cadastrado: {"name":"ANDRE","lastname":"SELVA","username":"teste","email":"selvaandre99@gmail.com","password":"tete","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
+Usuário cadastrado: {"name":"ANDRE","lastname":"SELVA","username":"ffdsfsd","email":"selvaandre99@gmail.com","password":"fsdfsdf","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
+Usuário ID: 8 excluído com sucesso

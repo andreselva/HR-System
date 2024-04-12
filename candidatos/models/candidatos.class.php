@@ -23,19 +23,21 @@ class Candidate
     {
 
         try {
-            $sql = "INSERT INTO candidates (name, lastname, username, email, password, address, complement, city, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO candidates (name, cpf, rg, username, email, cep, address, complement, city, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $stmt = $this->pdo->prepare($sql);
 
             $stmt->bindParam(1, $data['name']);
-            $stmt->bindParam(2, $data['lastname']);
-            $stmt->bindParam(3, $data['username']);
-            $stmt->bindParam(4, $data['email']);
-            $stmt->bindParam(5, $data['password']);
-            $stmt->bindParam(6, $data['address']);
-            $stmt->bindParam(7, $data['complement']);
-            $stmt->bindParam(8, $data['city']);
-            $stmt->bindParam(9, $data['state']);
+            $stmt->bindParam(2, $data['cpf']);
+            $stmt->bindParam(3, $data['rg']);
+            $stmt->bindParam(4, $data['username']);
+            $stmt->bindParam(5, $data['email']);
+            $stmt->bindParam(6, $data['cep']);
+            $stmt->bindParam(7, $data['password']);
+            $stmt->bindParam(8, $data['address']);
+            $stmt->bindParam(9, $data['complement']);
+            $stmt->bindParam(10, $data['city']);
+            $stmt->bindParam(11, $data['state']);
 
             $res = $stmt->execute();
 
@@ -127,22 +129,23 @@ class Candidate
         }
     }
 
-    public function editCandidate($id, $name, $lastname, $username, $email, $password, $address, $complement, $city, $state)
+    public function editCandidate($id, $name, $cpf, $rg, $username, $email, $cep, $address, $complement, $city, $state)
     {
         try {
-            $sql = "UPDATE candidates SET name=?, lastname=?, username=?, email=?, password=?, address=?, complement=?, city=?, state=? WHERE id=?";
+            $sql = "UPDATE candidates SET name=?, cpf=?, rg=?, username=?, email=?, cep=?, address=?, complement=?, city=?, state=? WHERE id=?";
 
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(1, $name);
-            $stmt->bindParam(2, $lastname);
-            $stmt->bindParam(3, $username);
-            $stmt->bindParam(4, $email);
-            $stmt->bindParam(5, $password);
-            $stmt->bindParam(6, $address);
-            $stmt->bindParam(7, $complement);
-            $stmt->bindParam(8, $city);
-            $stmt->bindParam(9, $state);
-            $stmt->bindParam(10, $id);
+            $stmt->bindParam(2, $cpf);
+            $stmt->bindParam(3, $rg);
+            $stmt->bindParam(4, $username);
+            $stmt->bindParam(5, $email);
+            $stmt->bindParam(6, $cep);
+            $stmt->bindParam(7, $address);
+            $stmt->bindParam(8, $complement);
+            $stmt->bindParam(9, $city);
+            $stmt->bindParam(10, $state);
+            $stmt->bindParam(11, $id);
 
             $res = $stmt->execute();
 
