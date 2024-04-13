@@ -23,7 +23,7 @@ class Candidate
     {
 
         try {
-            $sql = "INSERT INTO candidates (name, cpf, rg, username, email, cep, address, complement, city, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO candidates (name, cpf, rg, username, email, cep, password, address, complement, city, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $stmt = $this->pdo->prepare($sql);
 
@@ -46,13 +46,13 @@ class Candidate
             }
 
             echo json_encode(array("message" => "Cadastrado com sucesso!"));
-            $logData = array_intersect_key($data, array_flip(['name', 'lastname', 'username', 'email', 'password', 'address', 'complement', 'city', 'state']));
+            $logData = array_intersect_key($data, array_flip(['name', 'cpf', 'rg', 'username', 'email', 'address', 'complement', 'city', 'state']));
             $logEntry = json_encode($logData);
             file_put_contents('./log.txt', "Usuário cadastrado: $logEntry\n", FILE_APPEND);
 
         } catch (PDOException $e) {
             $msg = $e->getMessage();
-            echo $msg;
+            file_put_contents('./log.txt', $msg, FILE_APPEND);
         }
     }
 
@@ -77,7 +77,7 @@ class Candidate
 
         } catch (PDOException $e) {
             $msg = $e->getMessage();
-            echo $msg;
+            file_put_contents('./log.txt', $msg, FILE_APPEND);
         }
     }
 
@@ -103,7 +103,8 @@ class Candidate
             echo json_encode(array("message" => "Usuário deletado com sucesso!"));
 
         } catch (PDOException $e) {
-            echo json_encode(array("error" => "Erro: " . $e->getMessage()));
+            $msg = $e->getMessage();
+            file_put_contents('./log.txt', $msg, FILE_APPEND);
         }
     }
 
@@ -125,14 +126,14 @@ class Candidate
 
         } catch (PDOException $e) {
             $msg = $e->getMessage();
-            echo $msg;
+            file_put_contents('./log.txt', $msg, FILE_APPEND);
         }
     }
 
-    public function editCandidate($id, $name, $cpf, $rg, $username, $email, $cep, $address, $complement, $city, $state)
+    public function editCandidate($id, $name, $cpf, $rg, $username, $email, $cep, $password, $address, $complement, $city, $state)
     {
         try {
-            $sql = "UPDATE candidates SET name=?, cpf=?, rg=?, username=?, email=?, cep=?, address=?, complement=?, city=?, state=? WHERE id=?";
+            $sql = "UPDATE candidates SET name=?, cpf=?, rg=?, username=?, email=?, cep=?, password=?, address=?, complement=?, city=?, state=? WHERE id=?;";
 
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(1, $name);
@@ -141,11 +142,12 @@ class Candidate
             $stmt->bindParam(4, $username);
             $stmt->bindParam(5, $email);
             $stmt->bindParam(6, $cep);
-            $stmt->bindParam(7, $address);
-            $stmt->bindParam(8, $complement);
-            $stmt->bindParam(9, $city);
-            $stmt->bindParam(10, $state);
-            $stmt->bindParam(11, $id);
+            $stmt->bindParam(7, $password);
+            $stmt->bindParam(8, $address);
+            $stmt->bindParam(9, $complement);
+            $stmt->bindParam(10, $city);
+            $stmt->bindParam(11, $state);
+            $stmt->bindParam(12, $id);
 
             $res = $stmt->execute();
 
@@ -154,9 +156,10 @@ class Candidate
             }
 
             echo json_encode(array("message" => "Usuário alterado com sucesso!"));
+
         } catch (PDOException $e) {
             $msg = $e->getMessage();
-            echo $msg;
+            file_put_contents('./log.txt', $msg, FILE_APPEND);
         }
     }
 }

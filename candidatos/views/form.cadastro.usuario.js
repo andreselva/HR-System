@@ -20,7 +20,7 @@ async function cancelEdit(event) {
         }
 
         window.location.href = './listagem.cadastros.php';
-        
+
     }
 }
 
@@ -97,17 +97,22 @@ async function cadastrarUsuario(event) {
     event.preventDefault();
 
     const form_cadastro = document.querySelector('#userForm');
-    const campos = ['name', 'lastname', 'username', 'email', 'password', 'adress', 'complement', 'city', 'state'];
+    const campos = ['name', 'cpf', 'rg', 'username', 'email', 'cep', 'password', 'address', 'complement', 'city', 'state'];
 
     for (const campo of campos) {
         const elemento = document.querySelector(`#${campo}`);
 
         if (!elemento) {
-            console.error(`Elemento com ID '${campo}' não encontrado.`);
-            break;
+            Swal.fire({
+                title: "Erro!",
+                text: `Elemento com ID '${campo}' não encontrado.`,
+                icon: "error"
+            }).then(() => {
+                return;
+            });
         }
 
-        const valor = elemento.value.trim();
+        const valor = await elemento.value.trim();
 
         if (valor === '') {
             await confirmSweet('Todos os campos devem ser preenchidos!', 'warning_dois');
@@ -235,6 +240,9 @@ async function salvarEdicao(id, event) {
             console.error('Erro ao salvar edição!');
         }
 
+        const responseData = await response.json();
+        console.log(responseData);
+
         Swal.fire({
             title: "",
             text: 'Dados alterados!',
@@ -243,12 +251,15 @@ async function salvarEdicao(id, event) {
             window.location.href = './listagem.cadastros.php';
         });
 
-        const responseData = await response.json();
-        console.log(responseData);
-
     } catch (error) {
         console.error('Erro no fetch:', error);
-        alert('Ocorreu um erro ao salvar.');
+        Swal.fire({
+            title: "",
+            text: `Erro ao editar. Verifique o response!`,
+            icon: "error"
+        }).then(() => {
+            return;
+        });
     }
 }
 

@@ -75,7 +75,7 @@
                         <label for="name" class="form-label">RG</label>
                         <input type="text" class="form-control" id="rg" name="rg" placeholder="Insira seu RG..." required>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label for="username" class="form-label">Nome de usuário</label>
                         <div class="input-group">
                             <div class="input-group-text">@</div>
@@ -86,6 +86,10 @@
                         <label for="email" class="form-label">E-mail</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Insira seu melhor e-mail..." required>
                     </div>
+                    <div class="col-md-4">
+                        <label for="Senha" class="form-label">Senha</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
                     <div class="col-md-2">
                         <label for="username" class="form-label">CEP</label>
                         <div class="input-group">
@@ -93,7 +97,7 @@
                             <button class="input-group-text"><i class="fas fa-map-marker-alt"></i></button>
                         </div>
                     </div>
-                    <div class="col-5">
+                    <div class="col-4">
                         <label for="address" class="form-label">Endereço</label>
                         <input type="text" class="form-control" id="address" name="address" required>
                     </div>
@@ -108,10 +112,6 @@
                     <div class="col-md-1">
                         <label for="state" class="form-label">Estado</label>
                         <input type="text" class="form-control" id="state" name="state">
-                    </div>
-                    <div class="col-md-5">
-                        <label for="Senha" class="form-label" style="display: none;">Senha</label>
-                        <input type="password" class="form-control" id="password" name="password" style="display: none;" required>
                     </div>
                     <div class="col-md-3">
                         <div>

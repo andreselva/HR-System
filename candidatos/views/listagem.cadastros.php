@@ -87,10 +87,11 @@
                                         </div>
                                     </th>
                                     <th>Nome</th>
-                                    <th>Sobrenome</th>
+                                    <th>CPF</th>
+                                    <th>RG</th>
                                     <th>E-mail</th>
+                                    <th>CEP</th>
                                     <th>Endereço</th>
-                                    <th>Complemento</th>
                                     <th>Cidade</th>
                                     <th>Estado</th>
                                     <th>Ações</th>
@@ -106,10 +107,11 @@
                                         </div>
                                     </td>
                                     <td>{$row['name']}</td>
-                                    <td>{$row['lastname']}</td>
+                                    <td>{$row['cpf']}</td>
+                                    <td>{$row['rg']}</td>
                                     <td>{$row['email']}</td>
+                                    <td>{$row['cep']}</td>
                                     <td>{$row['address']}</td>
-                                    <td>{$row['complement']}</td>
                                     <td>{$row['city']}</td>
                                     <td>{$row['state']}</td>
                                     <td> 

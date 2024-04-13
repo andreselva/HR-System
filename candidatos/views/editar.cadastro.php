@@ -30,9 +30,11 @@
     $candidate = $candidate->getCandidateById($userId);
 
     $name = $candidate['name'];
-    $lastname = $candidate['lastname'];
+    $cpf = $candidate['cpf'];
+    $rg = $candidate['rg'];
     $username = $candidate['username'];
     $email = $candidate['email'];
+    $cep = $candidate['cep'];
     $password = $candidate['password'];
     $address = $candidate['address'];
     $complement = $candidate['complement'];
@@ -94,42 +96,53 @@
                 <form id="editUserForm" class="row g-3" method="post">
 
                     <h4 style="padding-bottom: 20px;"><?php echo $name ?></h4>
-                    <div class="col-md-3">
+                    <div class="col-md-5">
                         <label for="name" class="form-label">Nome</label>
                         <input type="text" class="form-control" id="name" name="name" value="<?php echo $name; ?>" placeholder="Insira seu nome..." required>
                     </div>
-                    <div class="col-md-6">
-                        <label for="lastname" class="form-label">Sobrenome</label>
-                        <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo $lastname; ?>" placeholder="Insira seu sobrenome..." required>
+                    <div class="col-md-2">
+                        <label for="name" class="form-label">CPF</label>
+                        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Insira seu CPF..." value="<?php echo $cpf; ?>" oninput="formatarCPF(this)" required>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
+                        <label for="name" class="form-label">RG</label>
+                        <input type="text" class="form-control" id="rg" name="rg" placeholder="Insira seu RG..." value="<?php echo $rg; ?>" required>
+                    </div>
+                    <div class="col-md-2">
                         <label for="username" class="form-label">Nome de usuário</label>
                         <div class="input-group">
                             <div class="input-group-text">@</div>
                             <input type="text" class="form-control" id="username" name="username" value="<?php echo $username; ?>" placeholder="Username" required>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <label for="email" class="form-label">E-mail</label>
                         <input type="email" class="form-control" id="email" name="email" value="<?php echo $email; ?>" placeholder="Insira seu melhor e-mail..." required>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="password" class="form-label">Senha</label>
                         <input type="password" class="form-control" id="password" value="<?php echo $password; ?>" name="password" required>
                     </div>
-                    <div class="col-7">
+                    <div class="col-md-2">
+                        <label for="username" class="form-label">CEP</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="cep" name="cep"  value="<?php echo $cep; ?>" required>
+                            <button class="input-group-text"><i class="fas fa-map-marker-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-4">
                         <label for="address" class="form-label">Endereço</label>
                         <input type="text" class="form-control" id="address" name="address" value="<?php echo $address; ?>" required>
                     </div>
-                    <div class="col-5">
+                    <div class="col-2">
                         <label for="complement" class="form-label">Complemento</label>
                         <input type="text" class="form-control" id="complement" value="<?php echo $complement; ?>" name="complement">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <label for="city" class="form-label">Cidade</label>
                         <input type="text" class="form-control" id="city" name="city" value="<?php echo $city; ?>">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-1">
                         <label for="state" class="form-label">Estado</label>
                         <input type="text" class="form-control" id="state" name="state" value="<?php echo $state; ?>">
                     </div>
