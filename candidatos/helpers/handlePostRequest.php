@@ -12,6 +12,7 @@ class Request
 
             if ($action == 'cadastrar') {
                 $user->registerCandidate($data);
+                exit;
             }
 
             if ($action == 'excluir') {
@@ -23,6 +24,7 @@ class Request
                 }
 
                 $user->deleteCandidate($id);
+                exit;
             }
 
             if ($action == 'editar') {
@@ -40,6 +42,7 @@ class Request
                     $data['city'],
                     $data['state']
                 );
+                exit;
             }
         }
     }
