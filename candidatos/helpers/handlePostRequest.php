@@ -29,9 +29,11 @@ class Request
                 $user->editCandidate(
                     $data['id'],
                     $data['name'],
-                    $data['lastname'],
+                    $data['cpf'],
+                    $data['rg'],
                     $data['username'],
                     $data['email'],
+                    $data['cep'],
                     $data['password'],
                     $data['address'],
                     $data['complement'],

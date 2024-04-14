@@ -23,34 +23,36 @@ class Candidate
     {
 
         try {
-            $sql = "INSERT INTO candidates (name, lastname, username, email, password, address, complement, city, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO candidates (name, cpf, rg, username, email, cep, password, address, complement, city, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $stmt = $this->pdo->prepare($sql);
 
             $stmt->bindParam(1, $data['name']);
-            $stmt->bindParam(2, $data['lastname']);
-            $stmt->bindParam(3, $data['username']);
-            $stmt->bindParam(4, $data['email']);
-            $stmt->bindParam(5, $data['password']);
-            $stmt->bindParam(6, $data['address']);
-            $stmt->bindParam(7, $data['complement']);
-            $stmt->bindParam(8, $data['city']);
-            $stmt->bindParam(9, $data['state']);
+            $stmt->bindParam(2, $data['cpf']);
+            $stmt->bindParam(3, $data['rg']);
+            $stmt->bindParam(4, $data['username']);
+            $stmt->bindParam(5, $data['email']);
+            $stmt->bindParam(6, $data['cep']);
+            $stmt->bindParam(7, $data['password']);
+            $stmt->bindParam(8, $data['address']);
+            $stmt->bindParam(9, $data['complement']);
+            $stmt->bindParam(10, $data['city']);
+            $stmt->bindParam(11, $data['state']);
 
             $res = $stmt->execute();
 
-            if (!$res === true) {
+            if ($res !== true) {
                 echo json_encode(array("message" => "Ocorreu um erro ao realizar o cadastro!"));
             }
 
             echo json_encode(array("message" => "Cadastrado com sucesso!"));
-            $logData = array_intersect_key($data, array_flip(['name', 'lastname', 'username', 'email', 'password', 'address', 'complement', 'city', 'state']));
+            $logData = array_intersect_key($data, array_flip(['name', 'cpf', 'rg', 'username', 'email', 'address', 'complement', 'city', 'state']));
             $logEntry = json_encode($logData);
             file_put_contents('./log.txt', "Usuário cadastrado: $logEntry\n", FILE_APPEND);
 
         } catch (PDOException $e) {
             $msg = $e->getMessage();
-            echo $msg;
+            file_put_contents('./log.txt', $msg, FILE_APPEND);
         }
     }
 
@@ -59,11 +61,11 @@ class Candidate
     {
         try {
             $candidatos = array();
-            $sql = "SELECT * FROM candidates ORDER BY id desc";
+            $sql = "SELECT * FROM candidates ORDER BY id DESC";
             $res = $this->pdo->query($sql);
 
             if ($res->rowCount() === 0 || $res->rowCount() === '') {
-                echo "Nenhum usuário encontrado!";
+                echo "Nenhum candidato encontrado!";
                 return;
             }
 
@@ -72,9 +74,10 @@ class Candidate
             }
 
             return $candidatos;
+
         } catch (PDOException $e) {
             $msg = $e->getMessage();
-            echo $msg;
+            file_put_contents('./log.txt', $msg, FILE_APPEND);
         }
     }
 
@@ -91,62 +94,72 @@ class Candidate
             $stmt->bindParam(1, $id, PDO::PARAM_INT);
             $res = $stmt->execute();
 
-            if (!$res === true) {
+            if ($res !== true) {
                 echo json_encode(array("error" => "Ocorreu um erro ao excluir o usuário."));
                 return;
             }
 
             file_put_contents('./log.txt', "Usuário ID: $id excluído com sucesso\n", FILE_APPEND);
             echo json_encode(array("message" => "Usuário deletado com sucesso!"));
+
         } catch (PDOException $e) {
-            echo json_encode(array("error" => "Erro: " . $e->getMessage()));
+            $msg = $e->getMessage();
+            file_put_contents('./log.txt', $msg, FILE_APPEND);
         }
     }
 
     public function getCandidateById($id)
     {
         try {
-            $sql = "SELECT * FROM candidates WHERE id = {$id}";
-            $res = $this->pdo->query($sql);
+            $sql = "SELECT * FROM candidates WHERE id = ?";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(1, $id, PDO::PARAM_INT);
+            $stmt->execute();
 
-            if ($res->rowCount() == 0 || $res->rowCount() == '') {
+            $candidate = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if(!$candidate) {
                 return null;
             }
 
-            return $res->fetch(PDO::FETCH_ASSOC);
+            return $candidate;
+
         } catch (PDOException $e) {
             $msg = $e->getMessage();
-            echo $msg;
+            file_put_contents('./log.txt', $msg, FILE_APPEND);
         }
     }
 
-    public function editCandidate($id, $name, $lastname, $username, $email, $password, $address, $complement, $city, $state)
+    public function editCandidate($id, $name, $cpf, $rg, $username, $email, $cep, $password, $address, $complement, $city, $state)
     {
         try {
-            $sql = "UPDATE candidates SET name=?, lastname=?, username=?, email=?, password=?, address=?, complement=?, city=?, state=? WHERE id=?";
+            $sql = "UPDATE candidates SET name=?, cpf=?, rg=?, username=?, email=?, cep=?, password=?, address=?, complement=?, city=?, state=? WHERE id=?;";
 
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(1, $name);
-            $stmt->bindParam(2, $lastname);
-            $stmt->bindParam(3, $username);
-            $stmt->bindParam(4, $email);
-            $stmt->bindParam(5, $password);
-            $stmt->bindParam(6, $address);
-            $stmt->bindParam(7, $complement);
-            $stmt->bindParam(8, $city);
-            $stmt->bindParam(9, $state);
-            $stmt->bindParam(10, $id);
+            $stmt->bindParam(2, $cpf);
+            $stmt->bindParam(3, $rg);
+            $stmt->bindParam(4, $username);
+            $stmt->bindParam(5, $email);
+            $stmt->bindParam(6, $cep);
+            $stmt->bindParam(7, $password);
+            $stmt->bindParam(8, $address);
+            $stmt->bindParam(9, $complement);
+            $stmt->bindParam(10, $city);
+            $stmt->bindParam(11, $state);
+            $stmt->bindParam(12, $id);
 
             $res = $stmt->execute();
 
-            if (!$res == true) {
+            if ($res !== true) {
                 echo json_encode(array("error" => "Ocorreu um erro ao tentar editar o usuário: " . $stmt->error));
             }
 
             echo json_encode(array("message" => "Usuário alterado com sucesso!"));
+
         } catch (PDOException $e) {
             $msg = $e->getMessage();
-            echo $msg;
+            file_put_contents('./log.txt', $msg, FILE_APPEND);
         }
     }
 }

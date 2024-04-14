@@ -9,11 +9,14 @@
 
 .custom-sidebar {
     width: 200px;
+    /* Ajuste a largura conforme necessário */
 }
 
 .custom-main {
     flex: 0 0 80%;
+    /* Ajuste a largura conforme necessário */
     max-width: 100%;
+    /* Ajuste a largura conforme necessário */
 }
 
 body {
@@ -97,13 +100,10 @@ body {
     /* height: 100vh; */
     border-radius: 8px;
     padding: 40px;
-    width: 100%; 
+    width: 100%;
 }
 
 #table-users {
     text-align: center;
     align-items: center;
-    border-radius: 10px;
 }
-
-

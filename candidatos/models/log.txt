@@ -1,12 +1,3 @@
-Usuário ID: 108 excluído com sucesso
-Usuário ID: 113 excluído com sucesso
-Usuário cadastrado: {"name":"ANDRE","lastname":"SELVA","username":"teste","email":"selvaandre99@gmail.com","password":"1231232","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS","adress":null}
-Usuário cadastrado: {"name":"ANDRE","lastname":"SELVA","username":"teste","email":"selvaandre99@gmail.com","password":"teste","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
-Usuário ID: 1 excluído com sucesso
-Usuário cadastrado: {"name":"ANDRE","lastname":"SELVA","username":"TESTE","email":"selvaandre99@gmail.com","password":"TESTE","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
-Usuário cadastrado: {"name":"ANDRE 2","lastname":"SELVA","username":"TES","email":"selvaandre99@gmail.com","password":"TESTE","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
-Usuário ID: 2 excluído com sucesso
-Usuário ID: 3 excluído com sucesso
-Usuário cadastrado: {"name":"ANDRE","lastname":"SELVA","username":"TESTE","email":"selvaandre99@gmail.com","password":"TESTE","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
-Usuário cadastrado: {"name":"ANDRE 2","lastname":"SELVA","username":"TE","email":"selvaandre99@gmail.com","password":"TESTE","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
-Usuário cadastrado: {"name":"ANDRE 34434343","lastname":"SELVA","username":"dsada","email":"selvaandre99@gmail.com","password":"dasdasd","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
+Usuário cadastrado: {"name":"ANDRE SARAIVA SELVA","cpf":"044.096.570-54","rg":"1121624967","username":"dasdasda","email":"selvaandre99@gmail.com","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
+SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'state' at row 1SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'state' at row 1SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'state' at row 1SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'state' at row 1SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokensUsuário ID: 1 excluído com sucesso
+Usuário cadastrado: {"name":"ANDRE SARAIVA SELVA","cpf":"044.096.570-54","rg":"1121624967","username":"95700-000","email":"selvaandre99@gmail.com","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
