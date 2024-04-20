@@ -71,8 +71,8 @@
                     include __DIR__ . '/../models/candidatos.class.php';
 
 
-                    $usuarios = new Candidate($pdo);
-                    $usuarios = $candidate->listCandidates();
+                    $getCandidates = new Candidate();
+                    $usuarios = $getCandidates->listCandidates();
 
 
                     if (is_array($usuarios) && !empty($usuarios)) {

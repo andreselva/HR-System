@@ -201,6 +201,10 @@ async function excluirUsuario(id, event) {
         });
 
         const responseData = await response.json();
+        if (!responseData) {
+            console.error(`Erro ${responseData}`)
+        }
+
         console.log(responseData);
 
     } catch (error) {
@@ -241,6 +245,11 @@ async function salvarEdicao(id, event) {
         }
 
         const responseData = await response.json();
+
+        if (!responseData) {
+            console.error(`Erro ${responseData}`)
+        }
+
         console.log(responseData);
 
         Swal.fire({

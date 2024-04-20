@@ -3,8 +3,10 @@
 class Request
 {
 
-    public function handlePostRequest($user)
+    public function handlePostRequest()
     {
+        $user = new Candidate();
+
         if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
             $json_data = file_get_contents("php://input");
             $data = json_decode($json_data, true);
@@ -12,6 +14,7 @@ class Request
 
             if ($action == 'cadastrar') {
                 $user->registerCandidate($data);
+                exit;
             }
 
             if ($action == 'excluir') {
@@ -23,6 +26,7 @@ class Request
                 }
 
                 $user->deleteCandidate($id);
+                exit;
             }
 
             if ($action == 'editar') {
@@ -40,6 +44,7 @@ class Request
                     $data['city'],
                     $data['state']
                 );
+                exit;
             }
         }
     }

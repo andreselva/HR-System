@@ -26,8 +26,8 @@
         exit; // Saia do script para evitar processamento adicional
     }
 
-
-    $candidate = $candidate->getCandidateById($userId);
+    $getCandidateById = new Candidate();
+    $candidate = $getCandidateById->getCandidateById($userId);
 
     $name = $candidate['name'];
     $cpf = $candidate['cpf'];
