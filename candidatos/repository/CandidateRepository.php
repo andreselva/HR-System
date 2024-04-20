@@ -4,9 +4,9 @@ include __DIR__ . '/../../config/config.php';
 include __DIR__ . '/../helpers/handlePostRequest.php';
 
 $request = new Request();
-$request->handlePostRequest(new Candidate());
+$request->handlePostRequest(new CandidateRepository());
 
-class Candidate
+class CandidateRepository
 {
     private $pdo;
 
@@ -14,6 +14,24 @@ class Candidate
     {
         $database = new Database();
         $this->pdo = $database->getConnection();
+    }
+
+    private static function returnObject($data): object
+    {
+        return new Candidate(
+            $data['id'],
+            $data['name'],
+            $data['cpf'],
+            $data['rg'],
+            $data['username'],
+            $data['email'],
+            $data['cep'],
+            $data['password'],
+            $data['address'],
+            $data['complement'],
+            $data['city'],
+            $data['state']
+        );
     }
 
     public function registerCandidate($data)
@@ -69,7 +87,11 @@ class Candidate
                 $candidatos[] = $row;
             }
 
-            return $candidatos;
+            $objCandidates = array_map(function ($data) {
+                return $this->returnObject($data);
+            }, $candidatos);
+
+            return $objCandidates;
         } catch (PDOException $e) {
             $msg = $e->getMessage();
             file_put_contents('./log.txt', $msg, FILE_APPEND);
@@ -102,6 +124,7 @@ class Candidate
         }
     }
 
+    
     public function getCandidateById($id)
     {
         try {
@@ -116,7 +139,8 @@ class Candidate
                 return null;
             }
 
-            return $candidate;
+            return $this->returnObject($candidate);
+
         } catch (PDOException $e) {
             $msg = $e->getMessage();
             file_put_contents('./log.txt', $msg, FILE_APPEND);

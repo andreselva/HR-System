@@ -5,7 +5,7 @@ class Request
 
     public function handlePostRequest()
     {
-        $user = new Candidate();
+        $user = new CandidateRepository();
 
         if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
             $json_data = file_get_contents("php://input");
