@@ -34,7 +34,7 @@ class CandidateRepository
         );
     }
 
-    public function registerCandidate($data)
+    public function registerCandidate($data) :void
     {
 
         try {
@@ -92,13 +92,14 @@ class CandidateRepository
             }, $candidatos);
 
             return $objCandidates;
+
         } catch (PDOException $e) {
             $msg = $e->getMessage();
             file_put_contents('./log.txt', $msg, FILE_APPEND);
         }
     }
 
-    public function deleteCandidate($id)
+    public function deleteCandidate($id) :void
     {
         try {
             if (!isset($id)) {
@@ -124,8 +125,8 @@ class CandidateRepository
         }
     }
 
-    
-    public function getCandidateById($id)
+
+    public function getCandidateById($id) 
     {
         try {
             $sql = "SELECT * FROM candidates WHERE id = ?";
@@ -147,7 +148,7 @@ class CandidateRepository
         }
     }
 
-    public function editCandidate($id, $name, $cpf, $rg, $username, $email, $cep, $password, $address, $complement, $city, $state)
+    public function editCandidate($id, $name, $cpf, $rg, $username, $email, $cep, $password, $address, $complement, $city, $state) :void
     {
         try {
             $sql = "UPDATE candidates SET name=?, cpf=?, rg=?, username=?, email=?, cep=?, password=?, address=?, complement=?, city=?, state=? WHERE id=?;";
