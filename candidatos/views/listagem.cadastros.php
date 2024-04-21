@@ -68,6 +68,7 @@
                     </div>
                     <?php
 
+                    require_once __DIR__ . '/../model/AbstractCandidate.php';
                     include __DIR__ . '/../repository/CandidateRepository.php';
                     include __DIR__ . '/../model/Candidate.php';
 

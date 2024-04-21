@@ -8,8 +8,10 @@ class Request
         $user = new CandidateRepository();
 
         if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
+            
             $json_data = file_get_contents("php://input");
             $data = json_decode($json_data, true);
+
             $action = isset($data['action']) ? $data['action'] : null;
 
             if ($action == 'cadastrar') {

@@ -1,12 +1,10 @@
 <?php
 
+require_once __DIR__ . '/../model/AbstractCandidate.php';
 include __DIR__ . '/../../config/config.php';
 include __DIR__ . '/../helpers/handlePostRequest.php';
 
-$request = new Request();
-$request->handlePostRequest(new CandidateRepository());
-
-class CandidateRepository
+class CandidateRepository extends AbstractCandidate
 {
     private $pdo;
 
@@ -180,3 +178,6 @@ class CandidateRepository
         }
     }
 }
+
+$request = new Request();
+$request->handlePostRequest(new CandidateRepository());

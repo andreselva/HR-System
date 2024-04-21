@@ -1,3 +1,34 @@
+<?php
+
+require_once __DIR__ . '/../model/AbstractCandidate.php';
+require_once __DIR__ . '/../repository/CandidateRepository.php';
+require_once __DIR__ . '/../model/Candidate.php';
+
+// Verifique se o ID do usuário foi passado via GET na URL
+$userId = isset($_GET['id']) ? $_GET['id'] : null;
+
+$getCandidateById = new CandidateRepository();
+$candidate = $getCandidateById->getCandidateById($userId);
+
+if ($candidate) {
+    $candidate = new Candidate(
+        $candidate->getId(),
+        $candidate->getName(),
+        $candidate->getCPF(),
+        $candidate->getRG(),
+        $candidate->getUsername(),
+        $candidate->getEmail(),
+        $candidate->getCEP(),
+        $candidate->getPassword(),
+        $candidate->getAddress(),
+        $candidate->getComplement(),
+        $candidate->getCity(),
+        $candidate->getState()
+    );
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br" data-bs-theme="light">
 
@@ -12,46 +43,6 @@
 </head>
 
 <body>
-
-    <?php
-
-    require_once __DIR__ . '/../repository/CandidateRepository.php';
-    require_once __DIR__ . '/../model/Candidate.php';
-
-    // Verifique se o ID do usuário foi passado via GET na URL
-    if (isset($_GET['id'])) {
-        $userId = $_GET['id'];
-    } else {
-        // Se o ID do usuário não estiver definido, redirecione ou mostre uma mensagem de erro
-        echo "ID do usuário não fornecido.";
-        exit; // Saia do script para evitar processamento adicional
-    }
-
-    $getCandidateById = new CandidateRepository();
-    $candidate = $getCandidateById->getCandidateById($userId);
-
-    if ($candidate) {
-        $candidate = new Candidate(
-            $candidate->getId(),
-            $candidate->getName(),
-            $candidate->getCPF(),
-            $candidate->getRG(),
-            $candidate->getUsername(),
-            $candidate->getEmail(),
-            $candidate->getCEP(),
-            $candidate->getPassword(),
-            $candidate->getAddress(),
-            $candidate->getComplement(),
-            $candidate->getCity(),
-            $candidate->getState()
-        );
-    }
-
-
-    ?>
-
-    <input type="hidden" id="userId" name="userId" value="<?php echo $userId; ?>">
-
     <div class="container-fluid">
         <div class="row">
             <nav class="navbar navbar-expand-lg" id="nav-principal">
@@ -128,7 +119,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="password" class="form-label">Senha</label>
-                        <input type="password" class="form-control" id="password" value="<?php $candidate->getPassword() ?>" name="password" required>
+                        <input type="password" class="form-control" id="password" value="<?= $candidate->getPassword() ?>" name="password" required>
                     </div>
                     <div class="col-md-2">
                         <label for="username" class="form-label">CEP</label>
@@ -155,6 +146,7 @@
                     </div>
                     <div class="col-md-3">
                         <div>
+                            <input type="hidden" id="userId" name="userId" value="<?= $candidate->getId() ?>">
                             <button class="btn btn-primary" onclick="salvarEdicao(id, event)">Salvar</button>
                             <button class="btn btn-danger" onclick="cancelEdit(event)">Cancelar</button>
                         </div>
