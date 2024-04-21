@@ -152,7 +152,6 @@ if ($candidate) {
                         </div>
                     </div>
                 </form>
-
             </main>
         </div>
     </div>
