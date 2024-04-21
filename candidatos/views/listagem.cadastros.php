@@ -68,11 +68,12 @@
                     </div>
                     <?php
 
-                    include __DIR__ . '/../models/candidatos.class.php';
+                    include __DIR__ . '/../repository/CandidateRepository.php';
+                    include __DIR__ . '/../model/Candidate.php';
 
 
-                    $usuarios = new Candidate($pdo);
-                    $usuarios = $candidate->listCandidates();
+                    $getCandidates = new CandidateRepository();
+                    $usuarios = $getCandidates->listCandidates();
 
 
                     if (is_array($usuarios) && !empty($usuarios)) {
@@ -106,17 +107,17 @@
                                             <label class='form-check-label' for='flexCheckDefault'></label>
                                         </div>
                                     </td>
-                                    <td>{$row['name']}</td>
-                                    <td>{$row['cpf']}</td>
-                                    <td>{$row['rg']}</td>
-                                    <td>{$row['email']}</td>
-                                    <td>{$row['cep']}</td>
-                                    <td>{$row['address']}</td>
-                                    <td>{$row['city']}</td>
-                                    <td>{$row['state']}</td>
+                                    <td>{$row->getName()}</td>
+                                    <td>{$row->getCPF()}</td>
+                                    <td>{$row->getRG()}</td>
+                                    <td>{$row->getEmail()}</td>
+                                    <td>{$row->getCEP()}</td>
+                                    <td>{$row->getAddress()}</td>
+                                    <td>{$row->getCity()}</td>
+                                    <td>{$row->getState()}</td>
                                     <td> 
-                                        <button class='btn btn-primary' onclick='goToEdition({$row['id']}, event)'>Editar</button>
-                                        <button class='btn btn-danger' onclick='excluirUsuario({$row['id']}, event)'>Excluir</button>
+                                        <button class='btn btn-primary' onclick='goToEdition({$row->getId()}, event)'>Editar</button>
+                                        <button class='btn btn-danger' onclick='excluirUsuario({$row->getId()}, event)'>Excluir</button>
                                     </td>
                                 </tr>";
                         }

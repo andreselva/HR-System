@@ -3,23 +3,38 @@
 include __DIR__ . '/../../config/config.php';
 include __DIR__ . '/../helpers/handlePostRequest.php';
 
-$database = new Database();
-$pdo = $database->getConnection();
-$candidate = new Candidate($pdo);
-    
 $request = new Request();
-$request->handlePostRequest($candidate);
+$request->handlePostRequest(new CandidateRepository());
 
-class Candidate
+class CandidateRepository
 {
     private $pdo;
 
-    public function __construct($pdo)
+    public function __construct()
     {
-        $this->pdo = $pdo;
+        $database = new Database();
+        $this->pdo = $database->getConnection();
     }
 
-    public function registerCandidate($data)
+    private static function returnObject($data): object
+    {
+        return new Candidate(
+            $data['id'],
+            $data['name'],
+            $data['cpf'],
+            $data['rg'],
+            $data['username'],
+            $data['email'],
+            $data['cep'],
+            $data['password'],
+            $data['address'],
+            $data['complement'],
+            $data['city'],
+            $data['state']
+        );
+    }
+
+    public function registerCandidate($data) :void
     {
 
         try {
@@ -49,7 +64,6 @@ class Candidate
             $logData = array_intersect_key($data, array_flip(['name', 'cpf', 'rg', 'username', 'email', 'address', 'complement', 'city', 'state']));
             $logEntry = json_encode($logData);
             file_put_contents('./log.txt', "Usuário cadastrado: $logEntry\n", FILE_APPEND);
-
         } catch (PDOException $e) {
             $msg = $e->getMessage();
             file_put_contents('./log.txt', $msg, FILE_APPEND);
@@ -73,7 +87,11 @@ class Candidate
                 $candidatos[] = $row;
             }
 
-            return $candidatos;
+            $objCandidates = array_map(function ($data) {
+                return $this->returnObject($data);
+            }, $candidatos);
+
+            return $objCandidates;
 
         } catch (PDOException $e) {
             $msg = $e->getMessage();
@@ -81,7 +99,7 @@ class Candidate
         }
     }
 
-    public function deleteCandidate($id)
+    public function deleteCandidate($id) :void
     {
         try {
             if (!isset($id)) {
@@ -101,14 +119,14 @@ class Candidate
 
             file_put_contents('./log.txt', "Usuário ID: $id excluído com sucesso\n", FILE_APPEND);
             echo json_encode(array("message" => "Usuário deletado com sucesso!"));
-
         } catch (PDOException $e) {
             $msg = $e->getMessage();
             file_put_contents('./log.txt', $msg, FILE_APPEND);
         }
     }
 
-    public function getCandidateById($id)
+
+    public function getCandidateById($id) 
     {
         try {
             $sql = "SELECT * FROM candidates WHERE id = ?";
@@ -118,11 +136,11 @@ class Candidate
 
             $candidate = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if(!$candidate) {
+            if (!$candidate) {
                 return null;
             }
 
-            return $candidate;
+            return $this->returnObject($candidate);
 
         } catch (PDOException $e) {
             $msg = $e->getMessage();
@@ -130,7 +148,7 @@ class Candidate
         }
     }
 
-    public function editCandidate($id, $name, $cpf, $rg, $username, $email, $cep, $password, $address, $complement, $city, $state)
+    public function editCandidate($id, $name, $cpf, $rg, $username, $email, $cep, $password, $address, $complement, $city, $state) :void
     {
         try {
             $sql = "UPDATE candidates SET name=?, cpf=?, rg=?, username=?, email=?, cep=?, password=?, address=?, complement=?, city=?, state=? WHERE id=?;";
@@ -152,11 +170,10 @@ class Candidate
             $res = $stmt->execute();
 
             if ($res !== true) {
-                echo json_encode(array("error" => "Ocorreu um erro ao tentar editar o usuário: " . $stmt->error));
+                echo json_encode(array("error" => "Ocorreu um erro ao tentar editar o usuário."));
             }
 
             echo json_encode(array("message" => "Usuário alterado com sucesso!"));
-
         } catch (PDOException $e) {
             $msg = $e->getMessage();
             file_put_contents('./log.txt', $msg, FILE_APPEND);

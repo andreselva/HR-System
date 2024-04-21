@@ -1,0 +1,13 @@
+Usuário cadastrado: {"name":"ANDRE SARAIVA SELVA","cpf":"044.096.570-54","rg":"1121624967","username":"95700-000","email":"selvaandre99@gmail.com","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
+Usuário ID: 17 excluído com sucesso
+Usuário cadastrado: {"name":"ANDRE SARAIVA SELVA","cpf":"044.096.570-54","rg":"1121624967","username":"95700-000","email":"selvaandre99@gmail.com","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
+Usuário cadastrado: {"name":"ANDRE SARAIVA SELVA","cpf":"044.096.570-54","rg":"1121624967","username":"95700-000","email":"selvaandre99@gmail.com","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
+Usuário ID: 19 excluído com sucesso
+Usuário cadastrado: {"name":"ANDRE SARAIVA SELVA","cpf":"044.096.570-54","rg":"1121624967","username":"95700-000","email":"selvaandre99@gmail.com","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
+Usuário cadastrado: {"name":"ANDRE SARAIVA SELVA 2","cpf":"044.096.570-54","rg":"1121624967","username":"95700-000","email":"selvaandre99@gmail.com","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
+Usuário ID: 21 excluído com sucesso
+Usuário ID: 18 excluído com sucesso
+Usuário cadastrado: {"name":"ANDRE SARAIVA SELVA","cpf":"044.096.570-54","rg":"1121624967","username":"95700-000","email":"selvaandre99@gmail.com","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
+Usuário cadastrado: {"name":"ANDRE SARAIVA SELVA","cpf":"321.331.231-32","rg":"ddasda","username":"95700-000","email":"selvaandre99@gmail.com","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
+Usuário ID: 23 excluído com sucesso
+Usuário cadastrado: {"name":"ANDRE SARAIVA SELVA","cpf":"044.096.570-54","rg":"1121624967","username":"95700-000","email":"selvaandre99@gmail.com","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
