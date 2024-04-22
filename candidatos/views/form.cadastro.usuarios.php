@@ -75,7 +75,7 @@
                         <label for="name" class="form-label">RG</label>
                         <input type="text" class="form-control" id="rg" name="rg" placeholder="Insira seu RG..." required>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <label for="username" class="form-label">Nome de usuário</label>
                         <div class="input-group">
                             <div class="input-group-text">@</div>
@@ -90,7 +90,7 @@
                         <label for="Senha" class="form-label">Senha</label>
                         <input type="password" class="form-control" id="password" name="password" required>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <label for="username" class="form-label">CEP</label>
                         <div class="input-group">
                             <input type="text" class="form-control" id="cep" name="cep" required>

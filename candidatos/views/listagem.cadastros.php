@@ -75,11 +75,11 @@
                     $getCandidates = new CandidateRepository();
                     $usuarios = $getCandidates->listCandidates();
 
+                    if (!empty($usuarios)) {
 
-                    if (is_array($usuarios) && !empty($usuarios)) {
-                        echo "<div class='table-container' style='padding-top: 10px;' id='table-users'>";
-                        echo "<table class='table table-bordered table-rounded'";
-                        echo "<thead>
+                    ?>
+                        <div class='table-container' style='padding-top: 10px;' id='table-users'>
+                            <table class='table table-bordered table-rounded'>
                                 <tr>
                                     <th>
                                         <div class='form-check' id='checkbox-table'>
@@ -97,34 +97,32 @@
                                     <th>Estado</th>
                                     <th>Ações</th>
                                 </tr>
-                            </thead>";
-
-                        foreach ($usuarios as $row) {
-                            echo "<tr>
-                                    <td>
-                                        <div class='form-check' id='checkbox-table'>
-                                            <input class='form-check-input' type='checkbox' value='' id='flexCheckDefault'>
-                                            <label class='form-check-label' for='flexCheckDefault'></label>
-                                        </div>
-                                    </td>
-                                    <td>{$row->getName()}</td>
-                                    <td>{$row->getCPF()}</td>
-                                    <td>{$row->getRG()}</td>
-                                    <td>{$row->getEmail()}</td>
-                                    <td>{$row->getCEP()}</td>
-                                    <td>{$row->getAddress()}</td>
-                                    <td>{$row->getCity()}</td>
-                                    <td>{$row->getState()}</td>
-                                    <td> 
-                                        <button class='btn btn-primary' onclick='goToEdition({$row->getId()}, event)'>Editar</button>
-                                        <button class='btn btn-danger' onclick='excluirUsuario({$row->getId()}, event)'>Excluir</button>
-                                    </td>
-                                </tr>";
-                        }
-                        echo "</table>";
-                        echo "</div>";
-                    }
-                    ?>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($usuarios as $row) : ?>
+                                        <td>
+                                            <div class='form-check' id='checkbox-table'>
+                                                <input class='form-check-input' type='checkbox' value='' id='flexCheckDefault'>
+                                                <label class='form-check-label' for='flexCheckDefault'></label>
+                                            </div>
+                                        </td>
+                                        <td><?= $row->getName() ?></td>
+                                        <td><?= $row->getCPF() ?></td>
+                                        <td><?= $row->getRG() ?></td>
+                                        <td><?= $row->getEmail() ?></td>
+                                        <td><?= $row->getCEP() ?></td>
+                                        <td><?= $row->getAddress() ?></td>
+                                        <td><?= $row->getCity() ?></td>
+                                        <td><?= $row->getState() ?></td>
+                                        <td>
+                                            <button class='btn btn-primary' onclick='goToEdition(<?= $row->getId() ?>, event)'>Editar</button>
+                                            <button class='btn btn-danger' onclick='excluirUsuario(<?= $row->getId() ?>, event)'>Excluir</button>
+                                        </td>
+                                <?php endforeach;
+                                } ?>
+                                </tbody>
+                            </table>
+                        </div>
                 </form>
             </main>
         </div>

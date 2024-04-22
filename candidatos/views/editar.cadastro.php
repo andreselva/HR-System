@@ -115,7 +115,7 @@
                         <label for="name" class="form-label">RG</label>
                         <input type="text" class="form-control" id="rg" name="rg" placeholder="Insira seu RG..." value="<?= $candidate->getRG() ?>" required>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <label for="username" class="form-label">Nome de usuário</label>
                         <div class="input-group">
                             <div class="input-group-text">@</div>
@@ -130,7 +130,7 @@
                         <label for="password" class="form-label">Senha</label>
                         <input type="password" class="form-control" id="password" value="<?php $candidate->getPassword() ?>" name="password" required>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <label for="username" class="form-label">CEP</label>
                         <div class="input-group">
                             <input type="text" class="form-control" id="cep" name="cep" value="<?= $candidate->getCEP() ?>" required>
@@ -159,6 +159,15 @@
                             <button class="btn btn-danger" onclick="cancelEdit(event)">Cancelar</button>
                         </div>
                     </div>
+                    <div class="col-md-5"></div>
+                    <div class="col-md-5"></div>
+                    <div class="col-md-5"></div>
+                    <div class="col-md-5"></div>
+                    <div class="col-md-5"></div>
+                    <div class="col-md-5"></div>
+                    <div class="col-md-5"></div>
+                    <div class="col-md-5"></div>
+                    <div class="col-md-5"></div>    
                 </form>
 
             </main>
