@@ -19,7 +19,8 @@ class Request
                 case 'excluir':
                     $id = isset($data['id']) ? $data['id'] : null;
                     if ($id == null) {
-                        throw new Exception('Id não encontrado.');
+                        http_response_code(400);
+                        echo json_encode(array("message" => "O ID não está presente."));
                         break;
                     };
                     $user->deleteCandidate($id);
