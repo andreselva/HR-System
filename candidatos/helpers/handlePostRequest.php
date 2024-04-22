@@ -12,39 +12,36 @@ class Request
             $data = json_decode($json_data, true);
             $action = isset($data['action']) ? $data['action'] : null;
 
-            if ($action == 'cadastrar') {
-                $user->registerCandidate($data);
-                exit;
-            }
-
-            if ($action == 'excluir') {
-                $id = isset($data['id']) ? $data['id'] : null;
-
-                if ($id == null) {
-                    echo json_encode(array("error" => "ID não fornecido."));
-                    return;
-                }
-
-                $user->deleteCandidate($id);
-                exit;
-            }
-
-            if ($action == 'editar') {
-                $user->editCandidate(
-                    $data['id'],
-                    $data['name'],
-                    $data['cpf'],
-                    $data['rg'],
-                    $data['username'],
-                    $data['email'],
-                    $data['cep'],
-                    $data['password'],
-                    $data['address'],
-                    $data['complement'],
-                    $data['city'],
-                    $data['state']
-                );
-                exit;
+            switch ($action) {
+                case 'cadastrar':
+                    $user->registerCandidate($data);
+                    break;
+                case 'excluir':
+                    $id = isset($data['id']) ? $data['id'] : null;
+                    if ($id == null) {
+                        throw new Exception('Id não encontrado.');
+                        break;
+                    };
+                    $user->deleteCandidate($id);
+                    break;
+                case 'editar':
+                    $user->editCandidate(
+                        $data['id'],
+                        $data['name'],
+                        $data['cpf'],
+                        $data['rg'],
+                        $data['username'],
+                        $data['email'],
+                        $data['cep'],
+                        $data['password'],
+                        $data['address'],
+                        $data['complement'],
+                        $data['city'],
+                        $data['state']
+                    );
+                    break;
+                default:
+                    throw new Exception('Ação não reconhecida!');
             }
         }
     }
