@@ -1,8 +1,8 @@
 <?php
 
 require_once __DIR__ . '/../model/AbstractCandidate.php';
-include __DIR__ . '/../../config/config.php';
-include __DIR__ . '/../helpers/handlePostRequest.php';
+require_once __DIR__ . '/../../config/config.php';
+require_once __DIR__ . '/../helpers/handlePostRequest.php';
 
 class CandidateRepository extends AbstractCandidate
 {
@@ -54,7 +54,7 @@ class CandidateRepository extends AbstractCandidate
 
             $res = $stmt->execute();
 
-            if ($res !== true) {
+            if (!$res) {
                 echo json_encode(array("message" => "Ocorreu um erro ao realizar o cadastro!"));
             }
 
@@ -167,7 +167,7 @@ class CandidateRepository extends AbstractCandidate
 
             $res = $stmt->execute();
 
-            if ($res !== true) {
+            if (!$res) {
                 echo json_encode(array("error" => "Ocorreu um erro ao tentar editar o usuário."));
             }
 
