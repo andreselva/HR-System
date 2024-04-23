@@ -2,9 +2,9 @@
     --background-color: #EEEEEE;
     --primary-color: #222831;
     --secondary-color: #31363F;
-    --text-color: #FFFFFF;
-    --opacity-primary: 0.7;
-    --opacity-secondary: 0.2;
+    --text-color: #000;
+    --opacity-primary: 0.9;
+    --opacity-secondary: 0.5;
 }
 
 .custom-sidebar {
@@ -30,6 +30,7 @@ body {
 
 #nav-principal {
     height: 7vh;
+    box-shadow: 2px 2px 3px #222831;
     background-color: var(--primary-color);
     opacity: var(--opacity-primary);
 }
@@ -40,13 +41,21 @@ body {
 
 #nav-lateral {
     height: 100vh;
+    box-shadow: 1px 1px 1px #222831;
     background-color: var(--secondary-color);
     opacity: var(--opacity-secondary);
     color: var(--text-color);
 }
 
 #elem-nav-lat {
-    color: var(--text-color);
+    color: #fff;
+}
+
+.btn-camp-pesquisa {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 0.3rem;
 }
 
 #main-form-user {
