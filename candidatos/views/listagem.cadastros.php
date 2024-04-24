@@ -43,7 +43,7 @@
                             <div class="collapse" id="cadastrosMenu">
                                 <ul class="nav flex-column ml-3">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#" id="elem-nav-lat">Candidatos</a>
+                                        <a class="nav-link" href="listagem.cadastros.php" id="elem-nav-lat">Candidatos</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#" id="elem-nav-lat">Vagas</a>
@@ -172,7 +172,7 @@
         </div>
     </div>
 
-    <script src="form.cadastro.usuario.js"></script>
+    <script src="./js/form.cadastro.usuario.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="sweetalert2/package/dist /sweetalert2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

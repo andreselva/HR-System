@@ -60,63 +60,86 @@
                 </div>
             </nav>
             <!-- Conteúdo principal -->
-            <main class="col-md-10 custom-main" id="main-form-user-edit">
-                <form id="userForm" class="row g-3" method="post">
-                    <h4 style="padding-bottom: 40px;">Cadastrar candidato</h4>
-                    <div class="col-md-5">
-                        <label for="name" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Insira seu nome..." required>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="name" class="form-label">CPF</label>
-                        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Insira seu CPF..." oninput="formatarCPF(this)" required>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="name" class="form-label">RG</label>
-                        <input type="text" class="form-control" id="rg" name="rg" placeholder="Insira seu RG..." required>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="username" class="form-label">Nome de usuário</label>
-                        <div class="input-group">
-                            <div class="input-group-text">@</div>
-                            <input type="text" class="form-control" id="username" name="username" required>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <label for="email" class="form-label">E-mail</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Insira seu melhor e-mail..." required>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="Senha" class="form-label">Senha</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="username" class="form-label">CEP</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="cep" name="cep" required>
-                            <button class="input-group-text"><i class="fas fa-map-marker-alt"></i></button>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <label for="address" class="form-label">Endereço</label>
-                        <input type="text" class="form-control" id="address" name="address" required>
-                    </div>
-                    <div class="col-2">
-                        <label for="complement" class="form-label">Complemento</label>
-                        <input type="text" class="form-control" id="complement" name="complement">
-                    </div>
-                    <div class="col-md-3">
-                        <label for="city" class="form-label">Cidade</label>
-                        <input type="text" class="form-control" id="city" name="city">
-                    </div>
-                    <div class="col-md-1">
-                        <label for="state" class="form-label">Estado</label>
-                        <input type="text" class="form-control" id="state" name="state">
-                    </div>
-                    <div class="col-md-3">
+            <main>
+                <form id="userForm" method="post">
+                    <div>
                         <div>
-                            <button class="btn btn-primary" onclick="cadastrarUsuario(event)">Cadastrar</button>
-                            <button class="btn btn-danger" onclick="cancelEdit(event)">Cancelar</button>
+                            <h4 style="padding-bottom: 40px;">Cadastrar candidato</h4>
+                        </div>
+                        <div class="abas-cadastro">
+                            <div class="aba" data-tab="dados-pessoais">
+                                <h6>Dados pessoais</h6>
+                            </div>
+                            <div class="aba" data-tab="experiencia-profissional">
+                                <h6>Experiência profissional</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="dados-pessoais" class="tab-content">
+                        <div class="row-1">
+                            <div class="row-col-1">
+                                <label for="name">Nome</label>
+                                <input type="text" id="name" name="name" placeholder="Insira seu nome..." required>
+                            </div>
+                            <div class="row-col-2">
+                                <label for="cpf">CPF</label>
+                                <input type="text" id="cpf" name="cpf" placeholder="Insira seu CPF..." oninput="formatarCPF(this)" required>
+                            </div>
+                            <div class="row-col-3">
+                                <label for="name">RG</label>
+                                <input type="text" id="rg" name="rg" placeholder="Insira seu RG..." required>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <label for="username">Nome de usuário</label>
+                                <input type="text" id="username" name="username" required>
+                            </div>
+                            <div>
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" name="email" placeholder="Insira seu melhor e-mail..." required>
+                            </div>
+                            <div>
+                                <label for="password">Senha</label>
+                                <input type="password" id="password" name="password" required>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <label for="username">CEP</label>
+                                <div>
+                                    <input type="text" id="cep" name="cep" required>
+                                    <button><i class="fas fa-map-marker-alt"></i></button>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="address">Endereço</label>
+                                <input type="text" id="address" name="address" required>
+                            </div>
+                            <div>
+                                <label for="complement">Complemento</label>
+                                <input type="text" id="complement" name="complement">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-md-3">
+                                <label for="city">Cidade</label>
+                                <input type="text" id="city" name="city">
+                            </div>
+                            <div>
+                                <label for="state">Estado</label>
+                                <input type="text" id="state" name="state">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="experiencia-profissional" class="tab-content" style="display: none;">
+                        <h2>Teste</h2>
+                    </div>
+
+                    <div>
+                        <div>
+                            <button onclick="cadastrarUsuario(event)">Cadastrar</button>
+                            <button onclick="cancelEdit(event)">Cancelar</button>
                         </div>
                     </div>
                 </form>
@@ -125,10 +148,11 @@
         </div>
     </div>
 
-    <script src="form.cadastro.usuario.js"></script>
+    <script src="./js/form.cadastro.usuario.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="sweetalert2/package/dist /sweetalert2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/controla-abas.js"></script>
 </body>
 
 </html>

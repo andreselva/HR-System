@@ -2,13 +2,14 @@
     --background-color: #EEEEEE;
     --primary-color: #222831;
     --secondary-color: #31363F;
-    --text-color: #000;
-    --opacity-primary: 0.9;
-    --opacity-secondary: 0.5;
+    --text-color: #FFFFFF;
+    --opacity-primary: 0.7;
+    --opacity-secondary: 0.2;
 }
 
 .custom-sidebar {
     width: 200px;
+    position: relative;
     /* Ajuste a largura conforme necessário */
 }
 
@@ -30,7 +31,6 @@ body {
 
 #nav-principal {
     height: 7vh;
-    box-shadow: 2px 2px 3px #222831;
     background-color: var(--primary-color);
     opacity: var(--opacity-primary);
 }
@@ -40,22 +40,15 @@ body {
 }
 
 #nav-lateral {
-    height: 100vh;
-    box-shadow: 1px 1px 1px #222831;
+    /* position: fixed; */
+    height: calc(100vh - 4em);
     background-color: var(--secondary-color);
     opacity: var(--opacity-secondary);
     color: var(--text-color);
 }
 
 #elem-nav-lat {
-    color: #fff;
-}
-
-.btn-camp-pesquisa {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-right: 0.3rem;
+    color: var(--text-color);
 }
 
 #main-form-user {
@@ -68,16 +61,7 @@ body {
     padding: 15px;
 }
 
-#main-form-user-edit {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    margin: auto;
-    height: 100vh;
-    padding: 15px;
-    padding-top: 30px;
-}
+
 
 #listUserForm {
     background-color: #FFFFFF;
@@ -101,18 +85,67 @@ body {
     width: 100%;
 }
 
+
+/* <--- PÁGINA DE EDIÇÃO ---> */
 #userForm {
-    background-color: #FFFFFF;
     display: flex;
-    flex-direction: row;
-    align-items: left;
-    /* height: 100vh; */
-    border-radius: 8px;
-    padding: 40px;
-    width: 100%;
+    flex-direction: column;
+    position: absolute;
+    top: 6rem;
+    left: 20rem;
+    right: 20rem;
+    width: 92rem;
+    padding: 2rem;
+    gap: 2rem;
+    background-color: #FFFFFF;
 }
 
-#table-users {
-    text-align: center;
-    align-items: center;
+.abas-cadastro {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.aba {
+    cursor: pointer;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px 5px 0 0;
+}
+
+.aba.active {
+    background-color: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.tab-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.row-1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.row-col-1,
+.row-col-2,
+.row-col-3 {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.row-col-1 {
+    width: 35rem;
+}
+
+.row-col-2 {
+    width: 15rem;
+}
+
+.row-col-3 {
+    width: 15rem;
 }
