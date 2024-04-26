@@ -78,57 +78,57 @@
                     <div id="dados-pessoais" class="tab-content">
                         <div class="row-1">
                             <div class="row-col-1">
-                                <label for="name">Nome</label>
-                                <input type="text" id="name" name="name" placeholder="Insira seu nome..." required>
+                                <label for="name" class="user-label">Nome</label>
+                                <input required="" type="text" id="name" name="name" autocomplete="off" class="input">
                             </div>
                             <div class="row-col-2">
                                 <label for="cpf">CPF</label>
-                                <input type="text" id="cpf" name="cpf" placeholder="Insira seu CPF..." oninput="formatarCPF(this)" required>
+                                <input type="text" id="cpf" name="cpf" placeholder="Insira seu CPF..." class="input" oninput="formatarCPF(this)" required>
                             </div>
                             <div class="row-col-3">
                                 <label for="name">RG</label>
-                                <input type="text" id="rg" name="rg" placeholder="Insira seu RG..." required>
+                                <input type="text" id="rg" name="rg" placeholder="Insira seu RG..." class="input" required>
                             </div>
                         </div>
-                        <div>
-                            <div>
-                                <label for="username">Nome de usuário</label>
-                                <input type="text" id="username" name="username" required>
-                            </div>
-                            <div>
+                        <div class="row-2">
+                            <div class="row-col-4">
                                 <label for="email">E-mail</label>
-                                <input type="email" id="email" name="email" placeholder="Insira seu melhor e-mail..." required>
+                                <input type="email" id="email" name="email" placeholder="Insira seu melhor e-mail..." class="input" required>
                             </div>
-                            <div>
+                            <div class="row-col-5">
                                 <label for="password">Senha</label>
-                                <input type="password" id="password" name="password" required>
+                                <input type="password" id="password" name="password" class="input" required>
+                            </div>
+                            <div class="row-col-6">
+                                <label for="username">Nome de usuário</label>
+                                <input type="text" id="username" name="username" class="input" required>
                             </div>
                         </div>
-                        <div>
+                        <div class="row-3">
                             <div>
                                 <label for="username">CEP</label>
                                 <div>
-                                    <input type="text" id="cep" name="cep" required>
+                                    <input type="text" id="cep" name="cep" class="input" required>
                                     <button><i class="fas fa-map-marker-alt"></i></button>
                                 </div>
                             </div>
-                            <div>
+                            <div class="row-col-7">
                                 <label for="address">Endereço</label>
-                                <input type="text" id="address" name="address" required>
+                                <input type="text" id="address" name="address" class="input" required>
                             </div>
-                            <div>
+                            <div class="row-col-8">
                                 <label for="complement">Complemento</label>
-                                <input type="text" id="complement" name="complement">
+                                <input type="text" id="complement" name="complement" class="input">
                             </div>
                         </div>
-                        <div>
-                            <div class="col-md-3">
+                        <div class="row-4">
+                            <div class="row-col-9">
                                 <label for="city">Cidade</label>
-                                <input type="text" id="city" name="city">
+                                <input type="text" id="city" name="city" class="input">
                             </div>
-                            <div>
+                            <div class="row-col-10">
                                 <label for="state">Estado</label>
-                                <input type="text" id="state" name="state">
+                                <input type="text" id="state" name="state" class="input">
                             </div>
                         </div>
                     </div>
@@ -137,9 +137,9 @@
                     </div>
 
                     <div>
-                        <div>
-                            <button onclick="cadastrarUsuario(event)">Cadastrar</button>
-                            <button onclick="cancelEdit(event)">Cancelar</button>
+                        <div class="row-button">
+                            <button class="button-cadastrar" onclick="cadastrarUsuario(event)">Cadastrar</button>
+                            <button class="button-cancelar" onclick="cancelEdit(event)">Cancelar</button>
                         </div>
                     </div>
                 </form>
