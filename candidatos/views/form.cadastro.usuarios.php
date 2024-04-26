@@ -62,7 +62,6 @@
             <!-- Conteúdo principal -->
             <main>
                 <form id="userForm" method="post">
-
                     <div>
                         <div class="row-img">
                             <h4 style="padding-bottom: 40px;">Cadastrar candidato</h4>
@@ -70,7 +69,6 @@
                                 <img src="">
                             </div>
                         </div>
-
                         <div class="abas-cadastro">
                             <div class="aba" data-tab="dados-pessoais">
                                 <h6>Dados pessoais</h6>
