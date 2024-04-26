@@ -62,10 +62,15 @@
             <!-- Conteúdo principal -->
             <main>
                 <form id="userForm" method="post">
+
                     <div>
-                        <div>
+                        <div class="row-img">
                             <h4 style="padding-bottom: 40px;">Cadastrar candidato</h4>
+                            <div class="row-img-1">
+                                <img src="">
+                            </div>
                         </div>
+
                         <div class="abas-cadastro">
                             <div class="aba" data-tab="dados-pessoais">
                                 <h6>Dados pessoais</h6>
@@ -76,6 +81,7 @@
                         </div>
                     </div>
                     <div id="dados-pessoais" class="tab-content">
+
                         <div class="row-1">
                             <div class="row-col-1">
                                 <label for="name" class="user-label">Nome</label>
