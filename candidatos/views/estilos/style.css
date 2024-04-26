@@ -206,6 +206,14 @@ body {
     width: 20rem;
 }
 
+.row-col-9 {
+    width: 20rem;
+}
+
+.row-col-10 {
+    width: 7rem;
+}
+
 
 .input {
     border: solid 1.5px #9e9e9e;
