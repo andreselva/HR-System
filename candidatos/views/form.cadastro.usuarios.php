@@ -107,9 +107,11 @@
                         <div class="row-3">
                             <div>
                                 <label for="username">CEP</label>
-                                <div>
+                                <div style="display: flex; align-items: center;">
                                     <input type="text" id="cep" name="cep" class="input" required>
-                                    <button><i class="fas fa-map-marker-alt"></i></button>
+                                    <button style="border: none; background: none; cursor: pointer;">
+                                        <i class="fas fa-map-marker-alt" style="font-size: 1.5em;"></i>
+                                    </button>
                                 </div>
                             </div>
                             <div class="row-col-7">
