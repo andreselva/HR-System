@@ -1,3 +1,4 @@
+
 function goToEdition(id, event) {
     event.preventDefault();
     window.location.href = './editar.cadastro.php?id=' + id;
@@ -24,66 +25,6 @@ async function cancelEdit(event) {
     }
 }
 
-async function confirmSweet(mensagem, tipo) {
-    let resultado;
-
-    if (tipo === 'saving') {
-        const { value: salvar } =
-            await Swal.fire({
-                icon: 'question',
-                title: 'Confirmação',
-                text: mensagem,
-                showCancelButton: true,
-                confirmButtonText: 'Sim',
-                cancelButtonText: 'Não',
-            });
-
-        resultado = salvar;
-    }
-
-    if (tipo === 'warning') {
-        const { value: deletar } =
-            await Swal.fire({
-                icon: 'warning',
-                title: 'Cuidado...',
-                text: mensagem,
-                showCancelButton: true,
-                confirmButtonText: 'Sim',
-                cancelButtonText: 'Não',
-            });
-
-        resultado = deletar;
-    }
-
-    if (tipo === 'warning_dois') {
-        const { value: aceitar } =
-            await Swal.fire({
-                icon: 'warning',
-                title: 'Atenção!',
-                text: mensagem,
-                showCancelButton: false,
-                confirmButtonText: 'Ok',
-                cancelButtonText: 'Não',
-            });
-
-        resultado = aceitar;
-    }
-
-    if (tipo === 'cancel') {
-        const { value: cancelar } =
-            await Swal.fire({
-                icon: 'warning',
-                title: 'Atenção!',
-                text: mensagem,
-                showCancelButton: true,
-                confirmButtonText: 'Sim',
-                cancelButtonText: 'Não',
-            })
-
-        resultado = cancelar;
-    }
-    return resultado;
-}
 
 function formatarCPF(input) {
     let cpf = input.value.replace(/\D/g, '');
@@ -91,14 +32,7 @@ function formatarCPF(input) {
     input.value = cpf;
 }
 
-async function cadastrarUsuario(event) {
-    let campoVazio = null;
-
-    event.preventDefault();
-
-    const form_cadastro = document.querySelector('#userForm');
-    const campos = ['name', 'cpf', 'rg', 'username', 'email', 'cep', 'password', 'address', 'complement', 'city', 'state'];
-
+async function verificaCampos(campos) {
     for (const campo of campos) {
         const elemento = document.querySelector(`#${campo}`);
 
@@ -119,13 +53,21 @@ async function cadastrarUsuario(event) {
             campoVazio = elemento;
             return setTimeout(() => campoVazio.focus(), 260);
         }
-
     }
+}
+
+
+async function cadastrarUsuario(event) {
+    event.preventDefault();
+    let campoVazio = null;
+    const form_cadastro = document.querySelector('#userForm');
+    const campos = ['name', 'cpf', 'rg', 'username', 'email', 'cep', 'password', 'address', 'complement', 'city', 'state'];
+    verificaCampos(campos);
 
     try {
         const salvar = await confirmSweet('O cliente será cadastrado. Deseja prosseguir?', 'saving');
         if (!salvar) return;
-
+        
         const formData = new FormData(form_cadastro);
         formData.append('action', 'cadastrar');
         const data = {
@@ -272,3 +214,64 @@ async function salvarEdicao(id, event) {
     }
 }
 
+
+async function confirmSweet(mensagem, tipo) {
+    let resultado;
+
+    if (tipo === 'saving') {
+        const { value: salvar } =
+            await Swal.fire({
+                icon: 'question',
+                title: 'Confirmação',
+                text: mensagem,
+                showCancelButton: true,
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não',
+            });
+
+        resultado = salvar;
+    }
+
+    if (tipo === 'warning') {
+        const { value: deletar } =
+            await Swal.fire({
+                icon: 'warning',
+                title: 'Cuidado...',
+                text: mensagem,
+                showCancelButton: true,
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não',
+            });
+
+        resultado = deletar;
+    }
+
+    if (tipo === 'warning_dois') {
+        const { value: aceitar } =
+            await Swal.fire({
+                icon: 'warning',
+                title: 'Atenção!',
+                text: mensagem,
+                showCancelButton: false,
+                confirmButtonText: 'Ok',
+                cancelButtonText: 'Não',
+            });
+
+        resultado = aceitar;
+    }
+
+    if (tipo === 'cancel') {
+        const { value: cancelar } =
+            await Swal.fire({
+                icon: 'warning',
+                title: 'Atenção!',
+                text: mensagem,
+                showCancelButton: true,
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não',
+            })
+
+        resultado = cancelar;
+    }
+    return resultado;
+}

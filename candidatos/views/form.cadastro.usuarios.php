@@ -61,12 +61,14 @@
             </nav>
             <!-- Conteúdo principal -->
             <main>
-                <form id="userForm" method="post">
+                <form id="userForm" method="post" enctype="multipart/form-data">
                     <div>
                         <div class="row-img">
-                            <h4 style="padding-bottom: 40px;">Cadastrar candidato</h4>
+                            <h4>Cadastrar candidato</h4>
                             <div class="row-img-1">
-                                <img src="">
+                                <label for="inputImagem" class="botao-selecionar">Selecionar Imagem</label>
+                                <input type="file" id="inputImagem" accept="image/*" value="">
+                                <img id="imagemExibida" src="./img/img-teste.jpg">
                             </div>
                         </div>
                         <div class="abas-cadastro">
@@ -139,9 +141,36 @@
                         </div>
                     </div>
                     <div id="experiencia-profissional" class="tab-content" style="display: none;">
-                        <h2>Teste</h2>
-                    </div>
+                        <div class="row-exp">
+                            <div>
+                                <label>Currículo</label>
+                                <input type="file">
+                            </div>
+                            <div class="row-5">
+                                <div class="row-col-7">
+                                    <label>Empresa</label>
+                                    <input type="text" id="empresa" class="input">
+                                </div>
+                                <div class="row-col-7">
+                                    <label>Ocupação</label>
+                                    <input type="text" id="ocupacao" class="resizable-input">
+                                </div>
 
+                                <div class="row-col-10">
+                                    <label>Último salário</label>
+                                    <input type="text" id="ocupacao" class="input">
+                                </div>
+
+                                <div class="row-period">
+                                    <label>Período</label>
+                                    <div class="row-period-date">
+                                        <input type="date" id="dt-one" class="input">
+                                        <input type="date" id="dt-two" class="input">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div>
                         <div class="row-button">
                             <button class="button-cadastrar" onclick="cadastrarUsuario(event)">Cadastrar</button>
@@ -159,6 +188,7 @@
     <script src="sweetalert2/package/dist /sweetalert2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/controla-abas.js"></script>
+    <script src="./js/controla-img.js"></script>
 </body>
 
 </html>

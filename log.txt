@@ -1,3 +1,0 @@
-Usuário ID: 30 excluído com sucesso
-Usuário cadastrado: {"name":"Andr\u00e9 Saraiva Selva","cpf":"044.096.570-54","rg":"1121624967","username":"teste","email":"selvaandre99@gmail.com","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
-Usuário cadastrado: {"name":"Andr\u00e9","cpf":"044.096.570-54","rg":"1121624967","email":"selvaandre99@gmail.com","username":"95700-000","address":"Rua Calisto Orestes Sganzerla","complement":"Casa","city":"Bento Gon\u00e7alves","state":"RS"}
