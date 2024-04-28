@@ -1,0 +1,21 @@
+/* Estilos para a barra de rolagem */
+/* Estilos para navegadores WebKit (Safari, Chrome) */
+::-webkit-scrollbar {
+    width: 12px; /* largura da barra de rolagem */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; /* cor de fundo da trilha da barra de rolagem */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #a5a4a4; /* cor do controle deslizante da barra de rolagem */
+    border-radius: 6px; /* borda arredondada do controle deslizante */
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a5a4a4; /* cor do controle deslizante da barra de rolagem quando passa o mouse */
+  }
+  
+
+  

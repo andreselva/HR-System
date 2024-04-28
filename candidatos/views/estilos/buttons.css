@@ -6,9 +6,6 @@
     background-color: rgb(37, 37, 37);
     border: none;
     font-weight: 400;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
     cursor: pointer;
     transition-duration: .3s;
@@ -26,45 +23,19 @@
 }
 
 .button:hover {
-    width: 80px;
     border-radius: 50px;
-    transition-duration: .3s;
     background-color: rgb(255, 69, 69);
-    align-items: center;
-}
-
-.button:hover .svgIcon {
-    width: 40px;
-    transition-duration: .3s;
-    transform: translateY(40%);
-}
-
-.button::before {
-    position: absolute;
-    top: -20px;
-    content: "Excluir";
-    color: white;
-    transition-duration: .3s;
-    font-size: 2px;
-}
-
-.button:hover::before {
-    font-size: 13px;
-    opacity: 1;
-    transform: translateY(20px);
-    transition-duration: .2s;
 }
 
 
 /* BOTAO EDITAR CANDIDATO */
-
 .editBtn {
     width: 35px;
     height: 35px;
     border-radius: 20px;
     border: none;
     background-color: rgb(93, 93, 116);
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.123);
+    /* box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.123); */
     cursor: pointer;
     position: relative;
     overflow: hidden;
@@ -75,7 +46,7 @@
     content: "";
     width: 100%;
     height: 100%;
-    background-color: rgb(102, 102, 141);
+    /* background-color: rgb(102, 102, 141); */
     position: absolute;
     z-index: 1;
     transform: scale(0);
@@ -89,6 +60,7 @@
 }
 
 .editBtn:hover {
+    background-color: rgb(102, 102, 141);
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.336);
 }
 
@@ -100,24 +72,6 @@
     transform-origin: bottom;
 }
 
-.editBtn:hover svg {
-    transform: rotate(-15deg) translateX(5px);
-}
-
-.editBtn::after {
-    content: "";
-    width: 15px;
-    height: 1.5px;
-    position: absolute;
-    bottom: 5px;
-    left: -5px;
-    background-color: white;
-    border-radius: 2px;
-    z-index: 2;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.5s ease-out;
-}
 
 .editBtn:hover::after {
     transform: scaleX(1);
@@ -125,7 +79,9 @@
     transform-origin: right;
 }
 
+
 /* BOTAO IMPRESSAO */
+/* DA LISTAGEM DE CANDIDATOS */
 .download-btn {
     border: 1px solid #000;
     background-color: white;
@@ -152,10 +108,84 @@
     background-color: #000;
 }
 
-
-
 .btn-impressora-pesquisa {
     display: flex;
     flex-direction: row;
     gap: 0.5em;
+}
+
+
+/* BOTAO IMAGEM FORM CADASTRO */
+.botao-selecionar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    text-indent: -9999px;
+    /* Esconde o texto do botão */
+    cursor: pointer;
+    z-index: 1;
+    /* Garante que o botão esteja acima do input */
+}
+
+
+/* BUTTON CADASTRO */
+.button-cadastrar {
+    align-items: center;
+    border: 0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    color: #fff;
+    background-color: #1660c2;
+    display: flex;
+    font-family: Phantomsans, sans-serif;
+    font-size: 18px;
+    justify-content: center;
+    line-height: 2.5rem;
+    max-width: 100%;
+    min-width: 140px;
+    padding: 3px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.button-cadastrar:hover {
+    background-color: rgb(0, 195, 255)
+}
+
+
+/* BUTTON CANCELAR */
+.button-cancelar {
+    align-items: center;
+    border: 0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    color: #fff;
+    background-color: #da3e3e;
+    display: flex;
+    font-family: Phantomsans, sans-serif;
+    font-size: 18px;
+    justify-content: center;
+    line-height: 2.5rem;
+    max-width: 100%;
+    min-width: 140px;
+    padding: 3px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.button-cancelar:hover {
+    background-color: #ff0000cb;
 }

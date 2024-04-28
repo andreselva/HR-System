@@ -1,7 +1,5 @@
 
-
 // PRE VISUALIZACAO DA IMAGEM
-
 document.getElementById('inputImagem').addEventListener('change', function() {
     const arquivo = this.files[0];
     if (arquivo) {
@@ -13,5 +11,3 @@ document.getElementById('inputImagem').addEventListener('change', function() {
     }
   });
 
-
-  
