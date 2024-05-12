@@ -63,10 +63,10 @@
             </nav>
 
             <!-- Conteúdo principal -->
-            <main class="col-md-10 custom-main" id="main-form-user">
+            <main id="main-form-user">
                 <form id="listUserForm" method="post">
                     <h4 style="padding-bottom: 40px;">Candidatos</h4>
-                    <div class="btn-camp-pesquisa">
+                    <div class="print-search">
                         <div id="btn-register-user">
                             <button type="submit" class="btn btn-primary" onclick="goToRegister(event)">Cadastrar</button>
                         </div>
@@ -91,6 +91,8 @@
                             </div>
                         </div>
                     </div>
+
+
                     <?php
 
                     require_once __DIR__ . '/../repository/CandidateRepository.php';

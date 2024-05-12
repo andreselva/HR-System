@@ -54,11 +54,20 @@ body {
 #main-form-user {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    margin: auto;
-    height: 100vh;
-    padding: 15px;
+    position: absolute;
+    top: 5rem;
+    left: 19rem;
+    right: 19rem;
+    bottom: 0rem;
+    width: 94rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-top: 2rem;
+    gap: 2rem;
+    background-color: #FFFFFF;
+    border-top-left-radius: 0.7rem;
+    border-top-right-radius: 0.7rem;
+    overflow-y: auto;
 }
 
 
@@ -74,20 +83,12 @@ body {
     width: 100%;
 }
 
-#editUserForm {
-    background-color: #FFFFFF;
-    display: flex;
-    flex-direction: row;
-    align-items: left;
-    /* height: 100vh; */
-    border-radius: 8px;
-    padding: 40px;
-    width: 100%;
-}
+
 
 
 /* <--- PÁGINA DE EDIÇÃO ---> */
-#userForm {
+#userForm,
+#editUserForm {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -266,3 +267,8 @@ body {
     width: 7rem;
 }
 
+.print-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
