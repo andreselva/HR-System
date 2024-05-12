@@ -1,0 +1,274 @@
+:root {
+    --background-color: #EEEEEE;
+    --primary-color: #222831;
+    --secondary-color: #31363F;
+    --text-color: #FFFFFF;
+    --opacity-primary: 0.7;
+    --opacity-secondary: 0.2;
+}
+
+.custom-sidebar {
+    width: 200px;
+    position: relative;
+    /* Ajuste a largura conforme necessário */
+}
+
+.custom-main {
+    flex: 0 0 80%;
+    /* Ajuste a largura conforme necessário */
+    max-width: 100%;
+    /* Ajuste a largura conforme necessário */
+}
+
+body {
+    background-color: var(--background-color);
+}
+
+#checkbox-table {
+    display: flex;
+    justify-content: center;
+}
+
+#nav-principal {
+    height: 7vh;
+    background-color: var(--primary-color);
+    opacity: var(--opacity-primary);
+}
+
+#hr-system {
+    color: var(--text-color);
+}
+
+#nav-lateral {
+    /* position: fixed; */
+    height: calc(100vh - 4em);
+    background-color: var(--secondary-color);
+    opacity: var(--opacity-secondary);
+    color: var(--text-color);
+}
+
+#elem-nav-lat {
+    color: var(--text-color);
+}
+
+#main-form-user {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 5rem;
+    left: 19rem;
+    right: 19rem;
+    bottom: 0rem;
+    width: 94rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-top: 2rem;
+    gap: 2rem;
+    background-color: #FFFFFF;
+    border-top-left-radius: 0.7rem;
+    border-top-right-radius: 0.7rem;
+    overflow-y: auto;
+}
+
+
+
+#listing-form {
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    height: 100vh;
+    border-radius: 8px;
+    padding: 40px;
+    width: 100%;
+}
+
+
+
+
+/* <--- PÁGINA DE EDIÇÃO ---> */
+#registration-form,
+#edit-form {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 5rem;
+    left: 19rem;
+    right: 19rem;
+    bottom: 0rem;
+    width: 94rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-top: 2rem;
+    gap: 2rem;
+    background-color: #FFFFFF;
+    border-top-left-radius: 0.7rem;
+    border-top-right-radius: 0.7rem;
+    overflow-y: auto;
+}
+
+
+/*/ ------------------- ABAS FORM CADASTRO CANDIDATO ---------------------- /*/
+.abas-cadastro {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.aba {
+    cursor: pointer;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px 5px 0 0;
+}
+
+.aba.active {
+    background-color: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.tab-content {
+    display: flex;
+    flex-direction: column;
+    /* padding: 5%; */
+    gap: 1rem;
+}
+
+
+/* /----------- LINHAS FORM CADASTRO CANDIDATOS-----------/ */
+.row-img {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.row-img-1 {
+    display: flex;
+    flex-direction: column;
+    border: solid 0.5px #524f4f25;
+    border-radius: 6px;
+    width: 12rem;
+    height: 11rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.row-col-1,
+.row-col-2,
+.row-col-3,
+.row-col-4,
+.row-col-5,
+.row-col-6,
+.row-col-7,
+.row-col-8,
+.row-col-9,
+.row-col-10 {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em;
+}
+
+.row-1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.row-2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.row-3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.row-4 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 4rem;
+}
+
+.row-5 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 2rem;
+}
+
+.row-exp {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 4rem;
+}
+
+.row-period {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.row-period-date {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.row-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 2rem;
+    padding-bottom: 2rem;
+}
+
+.row-col-1 {
+    width: 35rem;
+}
+
+.row-col-2 {
+    width: 15rem;
+}
+
+.row-col-3 {
+    width: 15rem;
+}
+
+.row-col-4 {
+    width: 25rem;
+}
+
+.row-col-5 {
+    width: 30rem;
+}
+
+.row-col-6 {
+    width: 17rem;
+}
+
+.row-col-7 {
+    width: 40rem;
+}
+
+.row-col-8 {
+    width: 20rem;
+}
+
+.row-col-9 {
+    width: 20rem;
+}
+
+.row-col-10 {
+    width: 7rem;
+}
+
+.print-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

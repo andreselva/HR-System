@@ -1,3 +1,35 @@
+<?php
+
+require_once __DIR__ . '/../model/Candidate.php';
+require_once __DIR__ . '/../repository/CandidateRepository.php';
+require_once __DIR__ . '/../functions/functions.php';
+
+$userId = getId($_GET['id']);
+$getCandidate = new CandidateRepository();
+$candidate = $getCandidate->getCandidateById($userId);
+
+if ($candidate) {
+    $candidate = new Candidate(
+        $candidate->getId(),
+        $candidate->getName(),
+        $candidate->getCPF(),
+        $candidate->getRG(),
+        $candidate->getUsername(),
+        $candidate->getEmail(),
+        $candidate->getCEP(),
+        $candidate->getPassword(),
+        $candidate->getAddress(),
+        $candidate->getComplement(),
+        $candidate->getCity(),
+        $candidate->getState()
+    );
+}
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br" data-bs-theme="light">
 
@@ -7,50 +39,15 @@
     <title>HR System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="estilos/style.css">
+    <link rel="stylesheet" href="estilos/forms.css">
+    <link rel="stylesheet" href="estilos/buttons.css">
+    <link rel="stylesheet" href="estilos/inputs.css">
+    <link rel="stylesheet" href="estilos/scrollbar.css">
+
 
 </head>
 
 <body>
-
-    <?php
-
-    require_once __DIR__ . '/../repository/CandidateRepository.php';
-    require_once __DIR__ . '/../model/Candidate.php';
-
-    // Verifique se o ID do usuário foi passado via GET na URL
-    if (isset($_GET['id'])) {
-        $userId = $_GET['id'];
-    } else {
-        // Se o ID do usuário não estiver definido, redirecione ou mostre uma mensagem de erro
-        echo "ID do usuário não fornecido.";
-        exit; // Saia do script para evitar processamento adicional
-    }
-
-    $getCandidateById = new CandidateRepository();
-    $candidate = $getCandidateById->getCandidateById($userId);
-
-    if ($candidate) {
-        $candidate = new Candidate(
-            $candidate->getId(),
-            $candidate->getName(),
-            $candidate->getCPF(),
-            $candidate->getRG(),
-            $candidate->getUsername(),
-            $candidate->getEmail(),
-            $candidate->getCEP(),
-            $candidate->getPassword(),
-            $candidate->getAddress(),
-            $candidate->getComplement(),
-            $candidate->getCity(),
-            $candidate->getState()
-        );
-    }
-
-
-    ?>
-
-    <input type="hidden" id="userId" name="userId" value="<?php echo $userId; ?>">
 
     <div class="container-fluid">
         <div class="row">
@@ -99,64 +96,123 @@
                 </div>
             </nav>
             <!-- Conteúdo principal -->
-            <main class="col-md-10 custom-main" id="main-form-user-edit">
-                <form id="editUserForm" class="row g-3" method="post">
+            <main>
+                <form id="edit-form" method="post" enctype="multipart/form-data">
 
-                    <h4 style="padding-bottom: 20px;"><?= $candidate->getName() ?></h4>
-                    <div class="col-md-5">
-                        <label for="name" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="name" name="name" value="<?= $candidate->getName() ?>" placeholder="Insira seu nome..." required>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="name" class="form-label">CPF</label>
-                        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Insira seu CPF..." value="<?= $candidate->getCPF() ?>" oninput="formatarCPF(this)" required>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="name" class="form-label">RG</label>
-                        <input type="text" class="form-control" id="rg" name="rg" placeholder="Insira seu RG..." value="<?= $candidate->getRG() ?>" required>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="username" class="form-label">Nome de usuário</label>
-                        <div class="input-group">
-                            <div class="input-group-text">@</div>
-                            <input type="text" class="form-control" id="username" name="username" value="<?= $candidate->getUsername() ?>" placeholder="Username" required>
+                    <div>
+                        <div class="row-img">
+                            <h3 style="padding-bottom: 20px;"><?= $candidate->getName() ?></h3>
+                            <div class="row-img-1">
+                                <label for="inputImagem" class="botao-selecionar">Selecionar Imagem</label>
+                                <input type="file" id="inputImagem" accept="image/*" value="">
+                                <img id="imagemExibida" src="./img/img-teste.jpg">
+                            </div>
+                        </div>
+                        <div class="abas-cadastro">
+                            <div class="aba" data-tab="dados-pessoais">
+                                <h6>Dados pessoais</h6>
+                            </div>
+                            <div class="aba" data-tab="experiencia-profissional">
+                                <h6>Experiência profissional</h6>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
-                        <label for="email" class="form-label">E-mail</label>
-                        <input type="email" class="form-control" id="email" name="email" value="<?= $candidate->getEmail() ?>" placeholder="Insira seu melhor e-mail..." required>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="password" class="form-label">Senha</label>
-                        <input type="password" class="form-control" id="password" value="<?php $candidate->getPassword() ?>" name="password" required>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="username" class="form-label">CEP</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="cep" name="cep" value="<?= $candidate->getCEP() ?>" required>
-                            <button class="input-group-text"><i class="fas fa-map-marker-alt"></i></button>
+                    <div id="dados-pessoais" class="tab-content">
+
+                        <div class="row-1">
+                            <div class="row-col-1">
+                                <label for="name" class="user-label">Nome</label>
+                                <input required="" type="text" id="name" name="name" autocomplete="off" class="input" value="<?= $candidate->getName() ?>">
+                            </div>
+                            <div class="row-col-2">
+                                <label for="cpf">CPF</label>
+                                <input type="text" id="cpf" name="cpf" placeholder="Insira seu CPF..." class="input" oninput="formatarCPF(this)" value="<?= $candidate->getCPF() ?>" required>
+                            </div>
+                            <div class="row-col-3">
+                                <label for="name">RG</label>
+                                <input type="text" id="rg" name="rg" placeholder="Insira seu RG..." class="input" value="<?= $candidate->getRG() ?>" required>
+                            </div>
+                        </div>
+                        <div class="row-2">
+                            <div class="row-col-4">
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" name="email" placeholder="Insira seu melhor e-mail..." class="input" value="<?= $candidate->getEmail() ?>" required>
+                            </div>
+                            <div class="row-col-5">
+                                <label for="password">Senha</label>
+                                <input type="password" id="password" name="password" class="input" value="<?= $candidate->getPassword() ?>" required>
+                            </div>
+                            <div class="row-col-6">
+                                <label for="username">Nome de usuário</label>
+                                <input type="text" id="username" name="username" class="input" value="<?= $candidate->getUsername() ?>" required>
+                            </div>
+                        </div>
+                        <div class="row-3">
+                            <div>
+                                <label for="username">CEP</label>
+                                <div style="display: flex; align-items: center;">
+                                    <input type="text" id="cep" name="cep" class="input" value="<?= $candidate->getCEP() ?>" required>
+                                    <button style="border: none; background: none; cursor: pointer;">
+                                        <i class="fas fa-map-marker-alt" style="font-size: 1.5em;"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row-col-7">
+                                <label for="address">Endereço</label>
+                                <input type="text" id="address" name="address" class="input" value="<?= $candidate->getAddress() ?>" required>
+                            </div>
+                            <div class="row-col-8">
+                                <label for="complement">Complemento</label>
+                                <input type="text" id="complement" name="complement" class="input" value="<?= $candidate->getComplement() ?>">
+                            </div>
+                        </div>
+                        <div class="row-4">
+                            <div class="row-col-9">
+                                <label for="city">Cidade</label>
+                                <input type="text" id="city" name="city" class="input" value="<?= $candidate->getCity() ?>">
+                            </div>
+                            <div class="row-col-10">
+                                <label for="state">Estado</label>
+                                <input type="text" id="state" name="state" class="input" value="<?= $candidate->getState() ?>">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-4">
-                        <label for="address" class="form-label">Endereço</label>
-                        <input type="text" class="form-control" id="address" name="address" value="<?= $candidate->getAddress() ?>" required>
+                    <div id="experiencia-profissional" class="tab-content" style="display: none;">
+                        <div class="row-exp">
+                            <div>
+                                <label>Currículo</label>
+                                <input type="file">
+                            </div>
+                            <div class="row-5">
+                                <div class="row-col-7">
+                                    <label>Empresa</label>
+                                    <input type="text" id="empresa" class="input">
+                                </div>
+                                <div class="row-col-7">
+                                    <label>Ocupação</label>
+                                    <input type="text" id="ocupacao" class="resizable-input">
+                                </div>
+
+                                <div class="row-col-10">
+                                    <label>Último salário</label>
+                                    <input type="text" id="ocupacao" class="input">
+                                </div>
+
+                                <div class="row-period">
+                                    <label>Período</label>
+                                    <div class="row-period-date">
+                                        <input type="date" id="dt-one" class="input">
+                                        <input type="date" id="dt-two" class="input">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-2">
-                        <label for="complement" class="form-label">Complemento</label>
-                        <input type="text" class="form-control" id="complement" value="<?= $candidate->getComplement() ?>" name="complement">
-                    </div>
-                    <div class="col-md-3">
-                        <label for="city" class="form-label">Cidade</label>
-                        <input type="text" class="form-control" id="city" name="city" value="<?= $candidate->getCity() ?>">
-                    </div>
-                    <div class="col-md-1">
-                        <label for="state" class="form-label">Estado</label>
-                        <input type="text" class="form-control" id="state" name="state" value="<?= $candidate->getState() ?>">
-                    </div>
-                    <div class="col-md-3">
-                        <div>
-                            <button class="btn btn-primary" onclick="salvarEdicao(id, event)">Salvar</button>
-                            <button class="btn btn-danger" onclick="cancelEdit(event)">Cancelar</button>
+                    <div>
+                        <div class="row-button">
+                            <input type="hidden" id="userId" name="userId" value="<?php echo $userId; ?>">
+                            <button class="button-cadastrar" onclick="salvarEdicao(id, event)">Salvar</button>
+                            <button class="button-cancelar" onclick="cancelEdit(event)">Cancelar</button>
                         </div>
                     </div>
                 </form>
@@ -165,10 +221,12 @@
         </div>
     </div>
 
-    <script src="form.cadastro.usuario.js"></script>
+    <script src="./js/form.cadastro.usuario.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="sweetalert2/package/dist /sweetalert2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/controla-abas.js"></script>
+    <script src="./js/controla-img.js"></script>
 </body>
 
 </html>
