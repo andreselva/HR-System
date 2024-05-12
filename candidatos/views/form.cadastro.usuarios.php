@@ -65,7 +65,7 @@
             </nav>
             <!-- Conteúdo principal -->
             <main>
-                <form id="userForm" method="post" enctype="multipart/form-data">
+                <form id="registration-form" method="post" enctype="multipart/form-data">
                     <div>
                         <div class="row-img">
                             <h4>Cadastrar candidato</h4>

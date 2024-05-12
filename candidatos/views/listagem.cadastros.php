@@ -64,11 +64,11 @@
 
             <!-- Conteúdo principal -->
             <main id="main-form-user">
-                <form id="listUserForm" method="post">
+                <form id="listing-form" method="post">
                     <h4 style="padding-bottom: 40px;">Candidatos</h4>
                     <div class="print-search">
                         <div id="btn-register-user">
-                            <button type="submit" class="btn btn-primary" onclick="goToRegister(event)">Cadastrar</button>
+                            <button type="submit" class="button-cadastrar" onclick="goToRegister(event)">Cadastrar</button>
                         </div>
                         <div class="btn-impressora-pesquisa">
                             <div>

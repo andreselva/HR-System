@@ -60,7 +60,7 @@ async function verificaCampos(campos) {
 async function cadastrarUsuario(event) {
     event.preventDefault();
     let campoVazio = null;
-    const form_cadastro = document.querySelector('#userForm');
+    const form_cadastro = document.querySelector('#registration-form');
     const campos = ['name', 'cpf', 'rg', 'username', 'email', 'cep', 'password', 'address', 'complement', 'city', 'state'];
     verificaCampos(campos);
 
@@ -109,8 +109,7 @@ async function cadastrarUsuario(event) {
 
 async function excluirUsuario(id, event) {
     event.preventDefault();
-
-    const formCadastro = document.querySelector('#listUserForm');
+    const formCadastro = document.querySelector('#listing-form');
 
     try {
         const deletar = await confirmSweet('O usuário será excluído permanentemente. Deseja prosseguir?', 'warning');
@@ -158,7 +157,7 @@ async function excluirUsuario(id, event) {
 async function salvarEdicao(id, event) {
     event.preventDefault();
 
-    const formEdition = document.querySelector('#editUserForm');
+    const formEdition = document.querySelector('#edit-form');
     const userId = document.querySelector('#userId').value;
 
     try {

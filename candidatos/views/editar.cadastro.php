@@ -97,7 +97,7 @@ if ($candidate) {
             </nav>
             <!-- Conteúdo principal -->
             <main>
-                <form id="editUserForm" method="post" enctype="multipart/form-data">
+                <form id="edit-form" method="post" enctype="multipart/form-data">
 
                     <div>
                         <div class="row-img">
