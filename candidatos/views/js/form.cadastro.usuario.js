@@ -67,7 +67,7 @@ async function cadastrarUsuario(event) {
     try {
         const salvar = await confirmSweet('O cliente será cadastrado. Deseja prosseguir?', 'saving');
         if (!salvar) return;
-        
+
         const formData = new FormData(form_cadastro);
         formData.append('action', 'cadastrar');
         const data = {
@@ -212,6 +212,84 @@ async function salvarEdicao(id, event) {
         });
     }
 }
+
+
+async function searchValue(event) {
+    event.preventDefault();
+
+    const form = document.querySelector('#listing-form');
+    const searchInput = form.querySelector('.search__input');
+    const value = searchInput.value.trim(); // Capturando o valor e removendo espaços em branco desnecessários
+
+    try {
+        const formData = new FormData(form);
+        formData.append('action', 'buscar');
+        formData.append('searchValue', value); // Enviar o ID do usuário
+
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        const response = await fetch('../repository/CandidateRepository.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao buscar candidatos');
+        }
+
+        const responseData = await response.json();
+        // Atualizar a tabela na página com os dados recebidos
+        updateTable(responseData);
+
+    } catch (error) {
+        console.error('Erro no fetch: ', error);
+    }
+}
+
+function updateTable(data) {
+    const tableBody = document.querySelector('#table-users tbody');
+    tableBody.innerHTML = ''; // Limpar a tabela antes de adicionar os novos dados
+
+    data.forEach(candidate => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>
+                <div class='form-check' id='checkbox-table'>
+                    <input class='form-check-input' type='checkbox' value='' id='flexCheckDefault'>
+                    <label class='form-check-label' for='flexCheckDefault'></label>
+                </div>
+            </td>
+            <td>${candidate.name}</td>
+            <td>${candidate.cpf}</td>
+            <td>${candidate.rg}</td>
+            <td>${candidate.email}</td>
+            <td>${candidate.cep}</td>
+            <td>${candidate.address}</td>
+            <td>${candidate.city}</td>
+            <td>${candidate.state}</td>
+            <td>
+                <button class='editBtn' onclick='goToEdition(${candidate.id}, event)'>
+                    <svg height='1em' viewBox='0 0 512 512'>
+                        <!-- Ícone de edição -->
+                    </svg>
+                </button>
+                <button class='button' onclick='excluirUsuario(${candidate.id}, event)'>
+                    <svg viewBox='0 0 448 512' class='svgIcon'>
+                        <!-- Ícone de exclusão -->
+                    </svg>
+                </button>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
 
 
 async function confirmSweet(mensagem, tipo) {

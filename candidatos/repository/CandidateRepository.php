@@ -2,6 +2,7 @@
 
 include __DIR__ . '/../../config/config.php';
 include __DIR__ . '/../helpers/handlePostRequest.php';
+require_once __DIR__ . '/../model/Candidate.php';
 
 $request = new Request();
 $request->handlePostRequest(new CandidateRepository());
