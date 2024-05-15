@@ -41,11 +41,6 @@ class HandleRequest
                         $data['state']
                     );
                     break;
-                case 'buscar':
-                    $searchValue = isset($data['searchValue']) ? $data['searchValue'] : '';
-                    $result = $user->searchInformation($searchValue);
-                    echo json_encode($result);
-                    break;
                 default:
                     throw new Exception('Ação não reconhecida!');
             }

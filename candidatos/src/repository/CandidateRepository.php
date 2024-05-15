@@ -35,7 +35,7 @@ class CandidateRepository
         );
     }
 
-    public function registerCandidate($data): void
+    public function registerCandidate($data)
     {
 
         try {
@@ -62,12 +62,10 @@ class CandidateRepository
             }
 
             echo json_encode(array("message" => "Cadastrado com sucesso!"));
-            $logData = array_intersect_key($data, array_flip(['name', 'cpf', 'rg', 'username', 'email', 'address', 'complement', 'city', 'state']));
-            $logEntry = json_encode($logData);
-            file_put_contents('./log.txt', "Usuário cadastrado: $logEntry\n", FILE_APPEND);
+            
         } catch (PDOException $e) {
             $msg = $e->getMessage();
-            file_put_contents('./log.txt', $msg, FILE_APPEND);
+            return $msg;
         }
     }
 
@@ -95,39 +93,11 @@ class CandidateRepository
             return $objCandidates;
         } catch (PDOException $e) {
             $msg = $e->getMessage();
-            file_put_contents('./log.txt', $msg, FILE_APPEND);
+            return $msg;
         }
     }
 
-    public function searchInformation(string $valueInformation): array
-    {
-        $valueInformation = addslashes($valueInformation);
-
-        try {
-            $candidates = [];
-
-            $sql = "SELECT * FROM candidates WHERE name LIKE ? OR cpf = ? OR rg = ?";
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute(["%$valueInformation%", $valueInformation, $valueInformation]);
-
-            $candidates = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            if (empty($candidates)) {
-                return [];
-            }
-            $objCandidates = array_map(function ($data) {
-                return $this->returnObject($data);
-            }, $candidates);
-
-            return $objCandidates;
-            
-        } catch (PDOException $e) {
-            throw $e;
-        }
-    }
-
-
-    public function deleteCandidate($id): void
+    public function deleteCandidate($id)
     {
         try {
             if (!isset($id)) {
@@ -145,11 +115,11 @@ class CandidateRepository
                 return;
             }
 
-            file_put_contents('./log.txt', "Usuário ID: $id excluído com sucesso\n", FILE_APPEND);
             echo json_encode(array("message" => "Usuário deletado com sucesso!"));
+
         } catch (PDOException $e) {
             $msg = $e->getMessage();
-            file_put_contents('./log.txt', $msg, FILE_APPEND);
+            return $msg;
         }
     }
 
@@ -175,7 +145,7 @@ class CandidateRepository
         }
     }
 
-    public function editCandidate($id, $name, $cpf, $rg, $username, $email, $cep, $password, $address, $complement, $city, $state): void
+    public function editCandidate($id, $name, $cpf, $rg, $username, $email, $cep, $password, $address, $complement, $city, $state)
     {
         try {
             $sql = "UPDATE candidates SET name=?, cpf=?, rg=?, username=?, email=?, cep=?, password=?, address=?, complement=?, city=?, state=? WHERE id=?;";
@@ -201,9 +171,10 @@ class CandidateRepository
             }
 
             echo json_encode(array("message" => "Usuário alterado com sucesso!"));
+
         } catch (PDOException $e) {
             $msg = $e->getMessage();
-            file_put_contents('./log.txt', $msg, FILE_APPEND);
+            return $msg;
         }
     }
 }

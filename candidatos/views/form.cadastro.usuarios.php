@@ -193,6 +193,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/controla-abas.js"></script>
     <script src="./js/controla-img.js"></script>
+    <script src="./js/formataCPF.js"></script>
 </body>
 
 </html>

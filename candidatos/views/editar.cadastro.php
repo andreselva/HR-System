@@ -8,12 +8,7 @@ $userId = getId($_GET['id']);
 $getCandidate = new CandidateRepository();
 $candidate = $getCandidate->getCandidateById($userId);
 
-
-
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="pt-br" data-bs-theme="light">
@@ -28,8 +23,6 @@ $candidate = $getCandidate->getCandidateById($userId);
     <link rel="stylesheet" href="estilos/buttons.css">
     <link rel="stylesheet" href="estilos/inputs.css">
     <link rel="stylesheet" href="estilos/scrollbar.css">
-
-
 </head>
 
 <body>
@@ -212,6 +205,7 @@ $candidate = $getCandidate->getCandidateById($userId);
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/controla-abas.js"></script>
     <script src="./js/controla-img.js"></script>
+    <script src="./js/formataCPF.js"></script>
 </body>
 
 </html>
