@@ -1,34 +1,14 @@
 <?php
 
-require_once __DIR__ . '/../model/Candidate.php';
-require_once __DIR__ . '/../repository/CandidateRepository.php';
-require_once __DIR__ . '/../functions/functions.php';
+require_once __DIR__ . '/../src/entity/Candidate.php';
+require_once __DIR__ . '/../src/repository/CandidateRepository.php';
+require_once __DIR__ . '/../src/functions/functions.php';
 
 $userId = getId($_GET['id']);
 $getCandidate = new CandidateRepository();
 $candidate = $getCandidate->getCandidateById($userId);
 
-if ($candidate) {
-    $candidate = new Candidate(
-        $candidate->getId(),
-        $candidate->getName(),
-        $candidate->getCPF(),
-        $candidate->getRG(),
-        $candidate->getUsername(),
-        $candidate->getEmail(),
-        $candidate->getCEP(),
-        $candidate->getPassword(),
-        $candidate->getAddress(),
-        $candidate->getComplement(),
-        $candidate->getCity(),
-        $candidate->getState()
-    );
-}
-
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="pt-br" data-bs-theme="light">
@@ -43,8 +23,6 @@ if ($candidate) {
     <link rel="stylesheet" href="estilos/buttons.css">
     <link rel="stylesheet" href="estilos/inputs.css">
     <link rel="stylesheet" href="estilos/scrollbar.css">
-
-
 </head>
 
 <body>
@@ -227,6 +205,7 @@ if ($candidate) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/controla-abas.js"></script>
     <script src="./js/controla-img.js"></script>
+    <script src="./js/formataCPF.js"></script>
 </body>
 
 </html>

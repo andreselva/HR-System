@@ -1,9 +1,9 @@
 <?php
 
-class Request
+class HandleRequest
 {
 
-    public function handlePostRequest()
+    public function Request()
     {
         $user = new CandidateRepository();
 
