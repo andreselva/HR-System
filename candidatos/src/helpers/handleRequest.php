@@ -1,6 +1,6 @@
 <?php
 
-class Request
+class HandleRequest
 {
 
     public function Request()
