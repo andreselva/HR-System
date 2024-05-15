@@ -75,7 +75,7 @@ $candidate = $getCandidate->getCandidateById($userId);
             </nav>
             <!-- Conteúdo principal -->
             <main>
-                <form id="edit-form" method="post" enctype="multipart/form-data">
+                <form onkeydown="bloquearEnvio(event)" id="edit-form" method="post" enctype="multipart/form-data">
 
                     <div>
                         <div class="row-img">
@@ -206,6 +206,7 @@ $candidate = $getCandidate->getCandidateById($userId);
     <script src="./js/controla-abas.js"></script>
     <script src="./js/controla-img.js"></script>
     <script src="./js/formataCPF.js"></script>
+    <script src="./js/preventDefault.js"></script>
 </body>
 
 </html>
