@@ -95,8 +95,8 @@
 
                     <?php
 
-                    require_once __DIR__ . '/../repository/CandidateRepository.php';
-                    require_once __DIR__ . '/../model/Candidate.php';
+                    require_once __DIR__ . '/../src/repository/CandidateRepository.php';
+                    require_once __DIR__ . '/../src/entity/Candidate.php';
 
 
                     $getCandidates = new CandidateRepository();

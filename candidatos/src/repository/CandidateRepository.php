@@ -1,11 +1,11 @@
 <?php
 
-include __DIR__ . '/../../config/config.php';
-include __DIR__ . '/../helpers/handlePostRequest.php';
-require_once __DIR__ . '/../model/Candidate.php';
+include __DIR__ . '/../../../config/config.php';
+include __DIR__ . '/../helpers/handleRequest.php';
+require_once __DIR__ . '/../entity/Candidate.php';
 
 $request = new Request();
-$request->handlePostRequest(new CandidateRepository());
+$request->Request(new CandidateRepository());
 
 class CandidateRepository
 {

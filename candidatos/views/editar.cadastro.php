@@ -1,29 +1,14 @@
 <?php
 
-require_once __DIR__ . '/../model/Candidate.php';
-require_once __DIR__ . '/../repository/CandidateRepository.php';
-require_once __DIR__ . '/../functions/functions.php';
+require_once __DIR__ . '/../src/entity/Candidate.php';
+require_once __DIR__ . '/../src/repository/CandidateRepository.php';
+require_once __DIR__ . '/../src/functions/functions.php';
 
 $userId = getId($_GET['id']);
 $getCandidate = new CandidateRepository();
 $candidate = $getCandidate->getCandidateById($userId);
 
-if ($candidate) {
-    $candidate = new Candidate(
-        $candidate->getId(),
-        $candidate->getName(),
-        $candidate->getCPF(),
-        $candidate->getRG(),
-        $candidate->getUsername(),
-        $candidate->getEmail(),
-        $candidate->getCEP(),
-        $candidate->getPassword(),
-        $candidate->getAddress(),
-        $candidate->getComplement(),
-        $candidate->getCity(),
-        $candidate->getState()
-    );
-}
+
 
 
 ?>

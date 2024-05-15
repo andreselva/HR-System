@@ -3,7 +3,7 @@
 class Request
 {
 
-    public function handlePostRequest()
+    public function Request()
     {
         $user = new CandidateRepository();
 
