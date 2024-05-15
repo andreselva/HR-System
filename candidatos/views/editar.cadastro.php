@@ -8,7 +8,22 @@ $userId = getId($_GET['id']);
 $getCandidate = new CandidateRepository();
 $candidate = $getCandidate->getCandidateById($userId);
 
-
+if ($candidate) {
+    $candidate = new Candidate(
+        $candidate->getId(),
+        $candidate->getName(),
+        $candidate->getCPF(),
+        $candidate->getRG(),
+        $candidate->getUsername(),
+        $candidate->getEmail(),
+        $candidate->getCEP(),
+        $candidate->getPassword(),
+        $candidate->getAddress(),
+        $candidate->getComplement(),
+        $candidate->getCity(),
+        $candidate->getState()
+    );
+}
 
 
 ?>
@@ -28,8 +43,6 @@ $candidate = $getCandidate->getCandidateById($userId);
     <link rel="stylesheet" href="estilos/buttons.css">
     <link rel="stylesheet" href="estilos/inputs.css">
     <link rel="stylesheet" href="estilos/scrollbar.css">
-
-
 </head>
 
 <body>
@@ -212,6 +225,7 @@ $candidate = $getCandidate->getCandidateById($userId);
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/controla-abas.js"></script>
     <script src="./js/controla-img.js"></script>
+    <script src="./js/formataCPF.js"></script>
 </body>
 
 </html>

@@ -25,13 +25,6 @@ async function cancelEdit(event) {
     }
 }
 
-
-function formatarCPF(input) {
-    let cpf = input.value.replace(/\D/g, '');
-    cpf = cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
-    input.value = cpf;
-}
-
 async function verificaCampos(campos) {
     for (const campo of campos) {
         const elemento = document.querySelector(`#${campo}`);
@@ -67,7 +60,7 @@ async function cadastrarUsuario(event) {
     try {
         const salvar = await confirmSweet('O cliente será cadastrado. Deseja prosseguir?', 'saving');
         if (!salvar) return;
-        
+
         const formData = new FormData(form_cadastro);
         formData.append('action', 'cadastrar');
         const data = {
@@ -153,6 +146,7 @@ async function excluirUsuario(id, event) {
         alert('Ocorreu um erro ao excluir usuário.');
     }
 }
+
 
 async function salvarEdicao(id, event) {
     event.preventDefault();
