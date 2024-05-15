@@ -65,7 +65,7 @@
             </nav>
             <!-- Conteúdo principal -->
             <main>
-                <form id="registration-form" method="post" enctype="multipart/form-data">
+                <form onkeydown="bloquearEnvio(event)" id="registration-form" method="post" enctype="multipart/form-data">
                     <div>
                         <div class="row-img">
                             <h4>Cadastrar candidato</h4>
@@ -194,6 +194,7 @@
     <script src="./js/controla-abas.js"></script>
     <script src="./js/controla-img.js"></script>
     <script src="./js/formataCPF.js"></script>
+    <script src="./js/preventDefault.js"></script>
 </body>
 
 </html>

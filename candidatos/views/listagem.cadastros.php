@@ -64,7 +64,7 @@
 
             <!-- Conteúdo principal -->
             <main id="main-form-user">
-                <form id="listing-form" method="post">
+                <form onkeydown="bloquearEnvio(event)" id="listing-form" method="post">
                     <h4 style="padding-bottom: 40px;">Candidatos</h4>
                     <div class="print-search">
                         <div id="btn-register-user">
@@ -172,6 +172,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/filtro.js"></script>
     <script src="./js/formataCPF.js"></script>
+    <script src="./js/preventDefault.js"></script>
 </body>
 
 </html>
