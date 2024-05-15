@@ -11,7 +11,7 @@ $candidate = $getCandidate->getCandidateById($userId);
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br" data-bs-theme="light">
+<html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
