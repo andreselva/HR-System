@@ -17,7 +17,6 @@
     border-radius: 15px;
     width: 12em;
     transition: all ease-in-out .5s;
-    margin-right: -2rem;
   }
   
   .search__input:hover, .search__input:focus {
