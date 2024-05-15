@@ -2,8 +2,8 @@
 
 function getId($id)
 {
-    if (!isset($_GET['id'])) {
+    if (!isset($id) || $id === null) {
         return json_encode(array("message" => "ID não fornecido!"));
     }
-    return $userId = $_GET['id'];
+    return $id;
 }
