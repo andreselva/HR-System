@@ -1,6 +1,5 @@
 
 document.addEventListener('DOMContentLoaded', function (e) {
-    e.preventDefault();
     const campoDeBusca = document.querySelector('.search__input');
 
     campoDeBusca.addEventListener('input', filtrarTabela);
@@ -27,22 +26,41 @@ document.addEventListener('DOMContentLoaded', function (e) {
 });
 
 
-function imprimirListagem(event) {
+async function getDataForPrint(event) {
     event.preventDefault();
-    // Copia apenas o conteúdo visível da tabela
-    const tabela = document.getElementById('table-users').cloneNode(true);
-    const linhas = tabela.querySelectorAll('tr');
-    linhas.forEach(linha => {
-        if (linha.style.display === 'none') {
-            linha.remove();
+
+    const valueFilter = document.querySelector('.search__input').value;
+    const listForm = document.querySelector('#listing-form');
+
+    try {
+        const formData = new FormData(listForm);
+        formData.append('action', 'print');
+        const data = {
+            action: 'print',
+            valueFilter: valueFilter,
+        };
+
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        const response = await fetch('../src/repository/CandidateRepository.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao cadastrar usuário!');
         }
-    });
 
-    // Abre uma nova janela e insere a tabela nela
-    const novaJanela = window.open('', '_blank');
-    novaJanela.document.body.innerHTML = '<h1>Listagem de Candidatos</h1>';
-    novaJanela.document.body.appendChild(tabela);
+        const responseData = await response.json();
+        console.log(responseData);
 
-    // Aciona o comando de impressão na nova janela
-    novaJanela.print();
+    } catch (error) {
+        console.error('Erro no fetch:', error);
+        return;
+    }
 }

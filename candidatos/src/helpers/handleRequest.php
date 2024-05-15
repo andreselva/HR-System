@@ -41,6 +41,8 @@ class HandleRequest
                         $data['state']
                     );
                     break;
+                    case 'print':
+                        return;
                 default:
                     throw new Exception('Ação não reconhecida!');
             }
