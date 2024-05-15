@@ -8,30 +8,10 @@ $userId = getId($_GET['id']);
 $getCandidate = new CandidateRepository();
 $candidate = $getCandidate->getCandidateById($userId);
 
-if ($candidate) {
-    $candidate = new Candidate(
-        $candidate->getId(),
-        $candidate->getName(),
-        $candidate->getCPF(),
-        $candidate->getRG(),
-        $candidate->getUsername(),
-        $candidate->getEmail(),
-        $candidate->getCEP(),
-        $candidate->getPassword(),
-        $candidate->getAddress(),
-        $candidate->getComplement(),
-        $candidate->getCity(),
-        $candidate->getState()
-    );
-}
-
-
 ?>
 
-
-
 <!DOCTYPE html>
-<html lang="pt-br" data-bs-theme="light">
+<html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
