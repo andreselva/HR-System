@@ -178,7 +178,7 @@ class CandidateRepository
         }
     }
 
-    public function getDataForPrint(string $filterValue = ''): array
+    public function getDataForPrint(string $filterValue = '') : array
     {
         $results = array();
         $safeFilter = filter_var($filterValue, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
