@@ -42,7 +42,9 @@ class HandleRequest
                     );
                     break;
                     case 'print':
-                        return;
+                        $filterValue = $data['valueFilter'];
+                        $getData = $user->getDataForPrint($filterValue);
+                        
                 default:
                     throw new Exception('Ação não reconhecida!');
             }
