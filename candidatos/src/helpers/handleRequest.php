@@ -41,6 +41,10 @@ class HandleRequest
                         $data['state']
                     );
                     break;
+                    case 'print':
+                        $filterValue = $data['valueFilter'];
+                        $getData = $user->getDataForPrint($filterValue);
+                        
                 default:
                     throw new Exception('Ação não reconhecida!');
             }

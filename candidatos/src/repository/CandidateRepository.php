@@ -58,11 +58,11 @@ class CandidateRepository
             $res = $stmt->execute();
 
             if ($res !== true) {
-                echo json_encode(array("message" => "Ocorreu um erro ao realizar o cadastro!"));
+                return json_encode(array("message" => "Ocorreu um erro ao realizar o cadastro!"));
             }
 
-            echo json_encode(array("message" => "Cadastrado com sucesso!"));
-            
+            return json_encode(array("message" => "Cadastrado com sucesso!"));
+
         } catch (PDOException $e) {
             $msg = $e->getMessage();
             return $msg;
@@ -91,6 +91,7 @@ class CandidateRepository
             }, $candidatos);
 
             return $objCandidates;
+
         } catch (PDOException $e) {
             $msg = $e->getMessage();
             return $msg;
@@ -111,18 +112,16 @@ class CandidateRepository
             $res = $stmt->execute();
 
             if ($res !== true) {
-                echo json_encode(array("error" => "Ocorreu um erro ao excluir o usuário."));
-                return;
+                return json_encode(array("error" => "Ocorreu um erro ao excluir o usuário."));
             }
 
-            echo json_encode(array("message" => "Usuário deletado com sucesso!"));
+            return json_encode(array("message" => "Usuário deletado com sucesso!"));
 
         } catch (PDOException $e) {
             $msg = $e->getMessage();
             return $msg;
         }
     }
-
 
     public function getCandidateById($id)
     {
@@ -139,9 +138,10 @@ class CandidateRepository
             }
 
             return $this->returnObject($candidate);
+
         } catch (PDOException $e) {
             $msg = $e->getMessage();
-            file_put_contents('./log.txt', $msg, FILE_APPEND);
+            return $msg;
         }
     }
 
@@ -166,11 +166,45 @@ class CandidateRepository
 
             $res = $stmt->execute();
 
-            if ($res !== true) {
-                echo json_encode(array("error" => "Ocorreu um erro ao tentar editar o usuário."));
+            if (!$res) {
+                return json_encode(array("error" => "Ocorreu um erro ao tentar editar o usuário."));
             }
 
-            echo json_encode(array("message" => "Usuário alterado com sucesso!"));
+            return json_encode(array("message" => "Usuário alterado com sucesso!"));
+
+        } catch (PDOException $e) {
+            $msg = $e->getMessage();
+            return $msg;
+        }
+    }
+
+    public function getDataForPrint(string $filterValue = '') : array
+    {
+        $results = array();
+        $safeFilter = filter_var($filterValue, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+        try {
+            if ($safeFilter === '' || $safeFilter === null) {
+                $sql = "SELECT * FROM candidates ORDER BY id";
+                $res = $this->pdo->query($sql);
+                $results = $res->fetchAll(PDO::FETCH_ASSOC);
+                return $results;
+            }
+
+            $sql = "SELECT * FROM candidates WHERE name=? or cpf=? or rg=?";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(1, $safeFilter);
+            $stmt->bindValue(2, $safeFilter);
+            $stmt->bindValue(3, $safeFilter);
+
+            $res = $stmt->execute();
+
+            if (!$res) {
+                return $results;
+            }
+
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
 
         } catch (PDOException $e) {
             $msg = $e->getMessage();
